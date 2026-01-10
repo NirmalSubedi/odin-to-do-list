@@ -1,0 +1,5 @@
+const renderPage=()=>{
+    
+}
+
+export {renderPage};

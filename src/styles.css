@@ -1,0 +1,78 @@
+:root {
+  /* Colors */
+  --clr-primary: hsl(123, 68%, 48%);
+  --clr-secondary: hsl(27, 79%, 74%);
+  --clr-accent: hsl(97, 76%, 61%);
+  --clr-text: hsl(243, 76, 5);
+  --clr-bg: hsl(240, 60, 99);
+
+  /* Font Family */
+  --ff-system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --ff-one: var(--ff-system-ui);
+
+  /* Font Sizes */
+  --font-scale: 1.25;
+  --fs-x-small: calc(var(--fs-small) / var(--font-scale));
+  --fs-small: calc(var(--fs-p) / var(--font-scale));
+  --fs-p: 1rem;
+  --fs-h6: calc(var(--fs-p) * var(--font-scale));
+  --fs-h5: calc(var(--fs-h6) * var(--font-scale));
+  --fs-h4: calc(var(--fs-h5) * var(--font-scale));
+  --fs-h3: calc(var(--fs-h4) * var(--font-scale));
+  --fs-h2: calc(var(--fs-h3) * var(--font-scale));
+  --fs-h1: calc(var(--fs-h2) * var(--font-scale));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--ff-one);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+}

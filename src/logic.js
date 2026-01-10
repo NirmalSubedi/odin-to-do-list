@@ -1,0 +1,5 @@
+function logic() {
+    
+}
+
+export {logic};
