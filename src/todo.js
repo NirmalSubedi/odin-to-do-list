@@ -7,6 +7,12 @@ class ToDo {
         this.notes = notes;
         this.isComplete = false;
     }
+
+    set isComplete(value) {
+        if(typeof value !== 'boolean') throw new Error(`Type needs to be boolean. ${value}'s type is ${typeof value}!`);
+        
+        this.isComplete = value;
+    }
 }
 
 export {ToDo};
