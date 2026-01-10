@@ -1,10 +1,4 @@
 import { ToDo } from "./todo.js";
+import { Project } from "./project.js";
 
-class Project{
-    constructor(name){
-        this.name = name;
-        this.tasks = [];
-    }
-}
-
-export {};
+export { };
