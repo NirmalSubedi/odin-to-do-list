@@ -8,7 +8,7 @@ class ToDo {
         this.isComplete = false;
     }
 
-    set isComplete(value) {
+    set complete(value) {
         if(typeof value !== 'boolean') throw new Error(`Type needs to be boolean. ${value}'s type is ${typeof value}!`);
         
         this.isComplete = value;
