@@ -13,7 +13,7 @@ const App = {
     },
 
     getProject(targetProject){
-        return this.projects.find(project=>targetProject.name === project.name);
+        return this.projects.find(project=>targetProject === project.name);
     }
 }
 
