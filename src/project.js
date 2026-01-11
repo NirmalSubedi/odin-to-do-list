@@ -16,7 +16,7 @@ class Project{
     }
 
     getTodo(targetTodo){
-        this.todos.find(todo=>targetTodo.title === todo.title);
+        return this.todos.find(todo=>targetTodo.title === todo.title);
     }
 }
 

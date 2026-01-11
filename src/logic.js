@@ -1,12 +1,20 @@
-import { ToDo } from "./todo.js";
 import { Project } from "./project.js";
 
-const projects = [];
+const App = {
+    projects: [],
 
-const defaultProject = new Project("Default");
+    createProject(name) {
+        this.projects.push(new Project(`${name}`));
+    },
 
-projects.push(defaultProject);
+    deleteProject(targetProject){
+        const targetProjectIndex = this.projects.findIndex(project => targetProject.name === project.name);
+        this.projects.splice(targetProjectIndex, 1);
+    },
 
+    getProject(targetProject){
+        return this.projects.find(project=>targetProject.name === project.name);
+    }
+}
 
-
-export { };
+export { App };
