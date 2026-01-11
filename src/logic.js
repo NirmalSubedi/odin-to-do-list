@@ -7,13 +7,13 @@ const App = {
         this.projects.push(new Project(`${name}`));
     },
 
-    deleteProject(targetProject){
+    deleteProject(targetProject) {
         const targetProjectIndex = this.projects.findIndex(project => targetProject.name === project.name);
         this.projects.splice(targetProjectIndex, 1);
     },
 
-    getProject(targetProject){
-        return this.projects.find(project=>targetProject === project.name);
+    getProject(targetProject) {
+        return this.projects.find(project => targetProject === project.name);
     }
 }
 

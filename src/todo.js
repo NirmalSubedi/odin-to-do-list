@@ -1,5 +1,5 @@
 class ToDo {
-    constructor({ title, description, dueDate, priority, notes}) {
+    constructor({ title, description, dueDate, priority, notes }) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -9,10 +9,10 @@ class ToDo {
     }
 
     set complete(value) {
-        if(typeof value !== 'boolean') throw new Error(`Type needs to be boolean. ${value}'s type is ${typeof value}!`);
-        
+        if (typeof value !== 'boolean') throw new Error(`Type needs to be boolean. ${value}'s type is ${typeof value}!`);
+
         this.isComplete = value;
     }
 }
 
-export {ToDo};
+export { ToDo };
