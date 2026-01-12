@@ -76,3 +76,13 @@ h5,
 h6 {
   line-height: 1.1;
 }
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(100px, 20%) 1fr;
+  min-height: 100vh;
+}
+
+.app>:first-child{
+  background:red;
+}

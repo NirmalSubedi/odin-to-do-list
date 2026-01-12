@@ -8,7 +8,104 @@
 </head>
 
 <body>
-    
+    <div class="app">
+        <div class="sidebar">
+            <div class="project-adder">
+                <button>Add Project</button>
+            </div>
+            <ul class="project-list">
+                <li>Default</li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="project-todos">
+                <div class="project-details">
+                    <h1>Default Project</h1>
+                    <div class="project-controls">
+                        <button>Edit Project</button><!--Toggle to Close Edition-->
+                        <button>Delete Project</button>
+                    </div>
+                </div>
+
+                <ul>
+                    <li>
+                        <label for="todo1">
+                            <div class="todo-title">
+                                <p class="todo-title-text">
+                                    <input type="checkbox" id="todo1" name="todo1">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Voluptas, officiis.
+                                </p>
+                                <p class="todo-priority-tag">Priority</p>
+                            </div>
+                            <p class="todo-due-date">Due Date</p>
+                        </label>
+                        <div class="todo-controls">
+                            <button class="edit-todo-button">Edit Task</button>
+                            <button class="delete-todo-button">Delete Task</button>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="todo2">
+                            <div class="todo-title">
+                                <p class="todo-title-text">
+                                    <input type="checkbox" id="todo2" name="todo2">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Voluptas, officiis.
+                                </p>
+                                <p class="todo-priority-tag">Priority</p>
+                            </div>
+                            <p class="todo-due-date">Due Date</p>
+                        </label>
+                        <div class="todo-controls">
+                            <button class="edit-todo-button">Edit Task</button>
+                            <button class="delete-todo-button">Delete Task</button>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="todo3">
+                            <div class="todo-title">
+                                <p class="todo-title-text">
+                                    <input type="checkbox" id="todo3" name="todo3">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Voluptas, officiis.
+                                </p>
+                                <p class="todo-priority-tag">Priority</p>
+                            </div>
+                            <p class="todo-due-date">Due Date</p>
+                        </label>
+                        <div class="todo-controls">
+                            <button class="edit-todo-button">Edit Task</button>
+                            <button class="delete-todo-button">Delete Task</button>
+                        </div>
+                    </li>
+                </ul>
+                <dialog>
+                    <form method="dialog">
+                        <button type="reset">Close</button>
+                        <p>
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title">
+                        </p>
+                        <p>
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="description">
+                        </p>
+                        <p>
+                            <label for="due-date">Due Date</label>
+                            <input type="datetime-local" name="due-date" id="due-date">
+                        </p>
+                        <p>
+                            <input type="checkbox" name="priority" id="priority">                            
+                            <label for="priority">Priority?</label>
+                        </p>
+                        <p>
+                            <label for="notes">Notes</label>
+                            <textarea name="notes" id="notes"></textarea>
+                        </p>
+                        <button type="submit" value="save">Save</button>
+                    </form>
+                </dialog>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
