@@ -10,8 +10,11 @@
 <body>
     <div class="app">
         <div class="sidebar">
-            <div class="project-adder">
-                <button>Add Project</button>
+            <div class="projects-control">
+                <button class="add-project-button"><img src="./images/add.svg" alt="add icon" width="24" height="24">Add
+                    Project</button>
+                <button class="remove-project-button"><img src="./images/remove.svg" alt="remove icon" width="24"
+                        height="24">Remove Project</button>
             </div>
             <ul class="project-list">
                 <li>Default</li>
@@ -22,8 +25,10 @@
                 <div class="project-details">
                     <h1>Default Project</h1>
                     <div class="project-controls">
-                        <button>Edit Project</button><!--Toggle to Close Edition-->
-                        <button>Delete Project</button>
+                        <button class="edit-project-button"><img src="./images/edit.svg" alt="edit icon" width="24"
+                                height="24">Edit Project</button><!--Toggle to Cancel Editing Button-->
+                        <button class="add-task-button"><img src="./images/add.svg" alt="add icon" width="24"
+                                height="24">Add Task</button>
                     </div>
                 </div>
 
@@ -40,8 +45,10 @@
                             <p class="todo-due-date">Due Date</p>
                         </label>
                         <div class="todo-controls">
-                            <button class="edit-todo-button">Edit Task</button>
-                            <button class="delete-todo-button">Delete Task</button>
+                            <button class="edit-todo-button"><img src="./images/edit.svg" alt="edit icon" width="24"
+                                    height="24">Edit Task</button>
+                            <button class="remove-todo-button"><img src="./images/remove.svg" alt="remove icon"
+                                    width="24" height="24">Remove Task</button>
                         </div>
                     </li>
                     <li>
@@ -56,8 +63,10 @@
                             <p class="todo-due-date">Due Date</p>
                         </label>
                         <div class="todo-controls">
-                            <button class="edit-todo-button">Edit Task</button>
-                            <button class="delete-todo-button">Delete Task</button>
+                            <button class="edit-todo-button"><img src="./images/edit.svg" alt="edit icon" width="24"
+                                    height="24">Edit Task</button>
+                            <button class="remove-todo-button"><img src="./images/remove.svg" alt="remove icon"
+                                    width="24" height="24">Remove Task</button>
                         </div>
                     </li>
                     <li>
@@ -72,8 +81,10 @@
                             <p class="todo-due-date">Due Date</p>
                         </label>
                         <div class="todo-controls">
-                            <button class="edit-todo-button">Edit Task</button>
-                            <button class="delete-todo-button">Delete Task</button>
+                            <button class="edit-todo-button"><img src="./images/edit.svg" alt="edit icon" width="24"
+                                    height="24">Edit Task</button>
+                            <button class="remove-todo-button"><img src="./images/remove.svg" alt="remove icon"
+                                    width="24" height="24">Remove Task</button>
                         </div>
                     </li>
                 </ul>
@@ -93,7 +104,7 @@
                             <input type="datetime-local" name="due-date" id="due-date">
                         </p>
                         <p>
-                            <input type="checkbox" name="priority" id="priority">                            
+                            <input type="checkbox" name="priority" id="priority">
                             <label for="priority">Priority?</label>
                         </p>
                         <p>

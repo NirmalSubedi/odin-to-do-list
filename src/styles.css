@@ -1,6 +1,7 @@
 :root {
   /* Colors */
   --clr-primary: hsl(123, 68%, 48%);
+  --clr-primary-400: hsl(123, 68%, 48%, 0.4);
   --clr-secondary: hsl(27, 79%, 74%);
   --clr-accent: hsl(97, 76%, 61%);
   --clr-text: hsl(243, 76, 5);
@@ -12,10 +13,10 @@
   --ff-one: var(--ff-system-ui);
 
   /* Font Sizes */
-  --font-scale: 1.25;
+  --font-scale: 1.125;
   --fs-x-small: calc(var(--fs-small) / var(--font-scale));
   --fs-small: calc(var(--fs-p) / var(--font-scale));
-  --fs-p: 1rem;
+  --fs-p: 1.125rem;
   --fs-h6: calc(var(--fs-p) * var(--font-scale));
   --fs-h5: calc(var(--fs-h6) * var(--font-scale));
   --fs-h4: calc(var(--fs-h5) * var(--font-scale));
@@ -39,7 +40,7 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: var(--clr-bg);
   color: var(--clr-text);
-  font-family: var(--ff-one);
+  font: var(--fs-p) / 1.6 var(--ff-one);
 }
 
 img,
@@ -74,7 +75,26 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.1;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+h2 {
+  font-size: var(--fs-h2);
+}
+h3 {
+  font-size: var(--fs-h3);
+}
+h4 {
+  font-size: var(--fs-h4);
+}
+h5 {
+  font-size: var(--fs-h5);
+}
+h6 {
+  font-size: var(--fs-h6);
 }
 
 .app {
@@ -83,6 +103,10 @@ h6 {
   min-height: 100vh;
 }
 
-.app>:first-child{
-  background:red;
+img[alt*="icon"] {
+  margin: 0 auto;
+}
+
+.sidebar {
+  background: var(--clr-primary-400);
 }
