@@ -158,26 +158,52 @@ img[alt~="icon"] {
   margin: 1rem 0 1rem 0.5rem;
 }
 
-.project-name button {
+.project-name {
   width: 100%;
   background-color: var(--clr-primary-300);
   border: none;
-  text-align: left;
   padding: 0.5rem 1rem;
   border-radius: 2rem 0 0 2rem;
+  display: flex;
+}
+
+.active-project .project-name {
+  background-color: var(--clr-bg);
+}
+
+.project-name:hover {
+  background-color: var(--clr-bg);
+}
+
+.project-name:active {
+  background-color: var(--clr-accent);
+}
+
+.project-name span {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: no-wrap;
+  margin-right: 3px;
 }
 
-.active-project button {
-  background-color: var(--clr-bg);
+.project-name img {
+  margin: 0 0 0 auto;
+  border-radius: 50%;
 }
 
-.project-name button:hover {
-  background-color: var(--clr-bg);
+.project-name img:hover {
+  box-shadow: 0 0 0 2px var(--clr-dark-700),
+    inset 0 0 0 100px var(--clr-dark-700);
 }
 
-.project-name button:active {
-  background-color: var(--clr-accent);
+.project-name img:focus {
+  outline-offset: 2px;
+}
+
+.hide-icon img {
+display: none;
+}
+
+.hide-icon span {
+  margin-right: 0;
 }
