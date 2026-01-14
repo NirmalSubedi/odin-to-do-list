@@ -12,16 +12,24 @@
         <div class="sidebar">
             <h2>Projects</h2>
             <ul class="project-list">
-                <li class="project-list-item default active-project"><button class="project-name"><span>Default</span></button></li>
-                <li class="project-list-item"><button class="project-name hide-icon"><span>DefaultDefaultDefaultDefaultDefaultDefaultDefault</span><img src="./images/remove.svg" alt="remove icon" width="24" height="24" tabindex="0"></button></li>
-                <li class="project-list-item"><button class="project-name hide-icon"><span>Default</span><img src="./images/remove.svg" alt="remove icon" width="24" height="24" tabindex="0"></button></li>
-                <li class="project-list-item"><button class="project-name hide-icon"><span>Default</span><img src="./images/remove.svg" alt="remove icon" width="24" height="24" tabindex="0"></button></li>
+                <li class="project-list-item default active-project"><button
+                        class="project-name"><span>Default</span></button></li>
+                <li class="project-list-item"><button
+                        class="project-name hide-icon"><span>DefaultDefaultDefaultDefaultDefaultDefaultDefault</span><img
+                            src="./images/remove.svg" alt="remove icon" width="20" height="20" tabindex="0"></button>
+                </li>
+                <li class="project-list-item"><button class="project-name hide-icon"><span>Default</span><img
+                            src="./images/remove.svg" alt="remove icon" width="20" height="20" tabindex="0"></button>
+                </li>
+                <li class="project-list-item"><button class="project-name hide-icon"><span>Default</span><img
+                            src="./images/remove.svg" alt="remove icon" width="20" height="20" tabindex="0"></button>
+                </li>
             </ul>
             <div class="projects-control">
-                <button class="add-project-button"><img src="./images/add.svg" alt="add icon" width="24" height="24">Add
-                    </button>
-                <button class="remove-projects-button"><img src="./images/remove.svg" alt="remove icon" width="24"
-                        height="24">Remove</button><!--Toggle to Cancel-->
+                <button class="edit-projects-button"><img src="./images/edit.svg" alt="edit icon" width="20"
+                        height="20">Edit</button> <!--Toggle to Cancel-->
+                <button class="add-project-button"><img src="./images/add.svg" alt="add icon" width="20"
+                        height="20">Add</button>
             </div>
         </div>
         <div class="main">
@@ -29,10 +37,10 @@
                 <div class="project-details">
                     <h1>Default Project</h1>
                     <div class="project-controls">
-                        <button class="edit-project-button"><img src="./images/edit.svg" alt="edit icon" width="24"
-                                height="24">Edit Project</button><!--Toggle to Cancel Editing Button-->
-                        <button class="add-task-button"><img src="./images/add.svg" alt="add icon" width="24"
-                                height="24">Add Task</button>
+                        <button class="edit-tasks-button"><img src="./images/edit.svg" alt="edit icon" width="20"
+                                height="20">Edit Tasks</button><!--Toggle to Cancel Editing Button-->
+                        <button class="add-task-button"><img src="./images/add.svg" alt="add icon" width="20"
+                                height="20">Add Task</button><!--Toggle to Delete Checked-->
                     </div>
                 </div>
 
@@ -40,55 +48,61 @@
                     <li>
                         <label for="todo1">
                             <div class="todo-title">
-                                <p class="todo-title-text">
-                                    <input type="checkbox" id="todo1" name="todo1">Lorem ipsum dolor sit amet
-                                    consectetur, adipisicing elit. Voluptas, officiis.
+                                <p>
+                                    <input type="checkbox" id="todo1" name="todo1"><span class="todo-title-text">
+                                        Lorem ipsum dolor sit amet
+                                        consectetur, adipisicing elit. Voluptas, officiis.
+                                    </span>
                                 </p>
                                 <p class="todo-priority-tag">Priority</p>
                             </div>
                             <p class="todo-due-date">Due Date</p>
                         </label>
                         <div class="todo-controls">
-                            <button class="edit-todo-button"><img src="./images/edit.svg" alt="edit icon" width="24"
-                                    height="24">Edit</button>
-                            <button class="remove-todo-button"><img src="./images/remove.svg" alt="remove icon"
-                                    width="24" height="24">Remove</button>
+                            <button class="edit-todo-button hide-button"><img src="./images/edit.svg" alt="edit icon" width="20"
+                                    height="20"></button>
+                            <button class="remove-todo-button hide-button"><img src="./images/remove.svg" alt="remove icon"
+                                    width="20" height="20"></button>
                         </div>
                     </li>
                     <li>
                         <label for="todo2">
                             <div class="todo-title">
-                                <p class="todo-title-text">
-                                    <input type="checkbox" id="todo2" name="todo2">Lorem ipsum dolor sit amet
-                                    consectetur, adipisicing elit. Voluptas, officiis.
+                                <p>
+                                    <input type="checkbox" id="todo2" name="todo2"><span class="todo-title-text">
+                                        Lorem ipsum dolor sit amet
+                                        consectetur, adipisicing elit. Voluptas, officiis.
+                                    </span>
                                 </p>
                                 <p class="todo-priority-tag">Priority</p>
                             </div>
                             <p class="todo-due-date">Due Date</p>
                         </label>
                         <div class="todo-controls">
-                            <button class="edit-todo-button"><img src="./images/edit.svg" alt="edit icon" width="24"
-                                    height="24">Edit</button>
-                            <button class="remove-todo-button"><img src="./images/remove.svg" alt="remove icon"
-                                    width="24" height="24">Remove</button>
+                            <button class="edit-todo-button hide-button"><img src="./images/edit.svg" alt="edit icon" width="20"
+                                    height="20"></button>
+                            <button class="remove-todo-button hide-button"><img src="./images/remove.svg" alt="remove icon"
+                                    width="20" height="20"></button>
                         </div>
                     </li>
                     <li>
                         <label for="todo3">
                             <div class="todo-title">
-                                <p class="todo-title-text">
-                                    <input type="checkbox" id="todo3" name="todo3">Lorem ipsum dolor sit amet
-                                    consectetur, adipisicing elit. Voluptas, officiis.
+                                <p>
+                                    <input type="checkbox" id="todo3" name="todo3"><span class="todo-title-text">
+                                        Lorem ipsum dolor sit amet
+                                        consectetur, adipisicing elit. Voluptas, officiis.
+                                    </span>
                                 </p>
                                 <p class="todo-priority-tag">Priority</p>
                             </div>
                             <p class="todo-due-date">Due Date</p>
                         </label>
                         <div class="todo-controls">
-                            <button class="edit-todo-button"><img src="./images/edit.svg" alt="edit icon" width="24"
-                                    height="24">Edit</button>
-                            <button class="remove-todo-button"><img src="./images/remove.svg" alt="remove icon"
-                                    width="24" height="24">Remove</button>
+                            <button class="edit-todo-button hide-button"><img src="./images/edit.svg" alt="edit icon" width="20"
+                                    height="20"></button>
+                            <button class="remove-todo-button hide-button"><img src="./images/remove.svg" alt="remove icon"
+                                    width="20" height="20"></button>
                         </div>
                     </li>
                 </ul>
