@@ -8,6 +8,7 @@
   --clr-text: hsl(243, 76%, 5%);
   --clr-bg: hsl(240, 60%, 99%);
 
+  --clr-light-200: hsl(0, 0%, 20%);
   --clr-light-400: hsl(0, 0%, 40%);
   --clr-light-700: hsl(0, 0%, 70%);
   --clr-light-850: hsl(0, 0%, 85%);
@@ -340,9 +341,82 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
     inset 0 0 0 10px var(--clr-light-700);
 }
 .todo-controls > *:active {
-  outline:3px solid var(--clr-light-700); 
+  outline: 3px solid var(--clr-light-700);
 }
 
 .hide-button {
   display: none;
+}
+
+.todo-dialog {
+  border: 2px solid var(--clr-text);
+}
+
+.todo-dialog .todo-form {
+  display: grid;
+  gap: 1rem;
+  width: 50vmin;
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+}
+
+.todo-form button[type="reset"] {
+  justify-self: end;
+  position: absolute;
+  background-color: var(--clr-bg);
+  border: 0;
+  border-radius: 50%;
+  padding: 0.125rem;
+}
+
+.todo-form button[type="reset"]:hover {
+  background-color: var(--clr-light-850);
+}
+
+.todo-form button[type="reset"]:active {
+  filter: invert(1);
+}
+
+.todo-form span.required {
+  color: #e00;
+  font-weight: initial;
+}
+
+.todo-form .todo-form-detail {
+  text-align: center;
+}
+
+.todo-form-detail span.note{
+  font-size: var(--fs-small);
+  font-weight: 300;
+}
+
+/* Checkbox excluded */
+.todo-form p:not(:has(input[type="checkbox"])) {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-form input[type=text]{
+  padding: calc(0.075rem/2) 0.5rem;
+}
+
+.todo-form textarea {
+  resize: none;
+  padding-left: 0.5rem;
+}
+
+.todo-form button[type="submit"] {
+  background-color: var(--clr-text);
+  color: var(--clr-bg);
+  border: 0;
+  outline-offset: 2px;
+}
+
+.todo-form button[type="submit"]:hover {
+  background-color: var(--clr-light-200);
+}
+
+.todo-form button[type="submit"]:active {
+  background-color: var(--clr-light-400);
 }
