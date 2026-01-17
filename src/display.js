@@ -1,11 +1,41 @@
-const renderPage = () => {
+class DOM {
+    static #query = {
+        todoDialog: document.querySelector('.todo-dialog'),
+        addTodoButton: document.querySelector('.add-todo-button'),
+    };
 
-}
+    static attachClickListener() {
+        document.addEventListener('click', DOM.#handleClick);
+    }
 
-const renderTodoDialog = () => {
-    const dialog = document.querySelector('.todo-dialog');
-    dialog.showModal();
-}
+    static #handleClick(event) {
+        const element = event.target;
+        const action = DOM.#getAction(element);
+        if (typeof action === undefined) return;
 
-renderTodoDialog();
-export { renderPage };
+        action.start();
+    };
+
+    static #getAction = (element) => {
+        return DOM.#actions.find(action =>
+            action.validElements.find(validElement=> validElement === element)
+        );
+    };
+
+    static #actions = [];
+
+    static registerAction({action, ...elements}) {
+        for (const element of elements) {
+            if (typeof element !== 'object') throw new TypeError('Element must be an object.');
+            if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
+        };
+        if(action !== "function") throw new TypeError('Action must be a function.');
+
+        DOM.#actions.push({
+            validElements: elements,
+            start: action,
+        });
+    };
+};
+
+DOM.attachClickListener();
