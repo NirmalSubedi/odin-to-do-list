@@ -1,5 +1,5 @@
 class DOM {
-    static #query = {
+    static query = {
         todoDialog: document.querySelector('.todo-dialog'),
         addTodoButton: document.querySelector('.add-todo-button'),
     };
@@ -25,6 +25,7 @@ class DOM {
     static #actions = [];
 
     static registerAction(action, ...elements) {
+        if (elements.length === 0) throw new Error('Need at least one element to register.')
         for (const element of elements) {
             if (typeof element !== 'object') throw new TypeError('Element must be an object.');
             if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
@@ -40,6 +41,8 @@ class DOM {
 
 const fun = () =>{};
 
-DOM.registerAction(fun,document.createElement('div'),document.createElement('p'))
+// DOM.registerAction(fun)
+DOM.registerAction(fun,DOM.query.addTodoButton)
+DOM.registerAction(fun,DOM.query.addTodoButton)
 
 DOM.attachClickListener();
