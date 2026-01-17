@@ -24,12 +24,12 @@ class DOM {
 
     static #actions = [];
 
-    static registerAction({action, ...elements}) {
+    static registerAction(action, ...elements) {
         for (const element of elements) {
             if (typeof element !== 'object') throw new TypeError('Element must be an object.');
             if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
         };
-        if(action !== "function") throw new TypeError('Action must be a function.');
+        if(typeof action !== "function") throw new TypeError('Action must be a function.');
 
         DOM.#actions.push({
             validElements: elements,
@@ -37,5 +37,9 @@ class DOM {
         });
     };
 };
+
+const fun = () =>{};
+
+DOM.registerAction(fun,document.createElement('div'),document.createElement('p'))
 
 DOM.attachClickListener();
