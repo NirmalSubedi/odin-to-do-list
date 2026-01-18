@@ -1,8 +1,8 @@
+import { showTodoDialog } from "./behavior.js";
+import { query } from "./query.js";
+
 class DOM {
-    static query = {
-        todoDialog: document.querySelector('.todo-dialog'),
-        addTodoButton: document.querySelector('.add-todo-button'),
-    };
+    static #actions = [];
 
     static attachClickListener() {
         document.addEventListener('click', DOM.#handleClick);
@@ -11,26 +11,23 @@ class DOM {
     static #handleClick(event) {
         const element = event.target;
         const action = DOM.#getAction(element);
-        if (typeof action === undefined) return;
-
-        action.start();
+        if (action === undefined) return;
+        action.start(element);
     };
 
     static #getAction = (element) => {
         return DOM.#actions.find(action =>
-            action.validElements.find(validElement=> validElement === element)
+            action.validElements.find(validElement => validElement === element)
         );
     };
 
-    static #actions = [];
-
     static registerAction(action, ...elements) {
+        if (typeof action !== 'function') throw new TypeError('Action must be a function.');
         if (elements.length === 0) throw new Error('Need at least one element to register.')
         for (const element of elements) {
             if (typeof element !== 'object') throw new TypeError('Element must be an object.');
             if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
         };
-        if(typeof action !== "function") throw new TypeError('Action must be a function.');
 
         DOM.#actions.push({
             validElements: elements,
@@ -39,10 +36,8 @@ class DOM {
     };
 };
 
-const fun = () =>{};
-
-// DOM.registerAction(fun)
-DOM.registerAction(fun,DOM.query.addTodoButton)
-DOM.registerAction(fun,DOM.query.addTodoButton)
+DOM.registerAction(showTodoDialog, query.addTodoButton);
 
 DOM.attachClickListener();
+
+export { DOM };

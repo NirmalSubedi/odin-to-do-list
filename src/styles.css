@@ -360,7 +360,7 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   color: var(--clr-text);
 }
 
-.todo-form button[type="reset"] {
+.todo-form .close-button {
   justify-self: end;
   position: absolute;
   background-color: var(--clr-bg);
@@ -369,11 +369,11 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   padding: 0.125rem;
 }
 
-.todo-form button[type="reset"]:hover {
+.todo-form .close-button:hover {
   background-color: var(--clr-light-850);
 }
 
-.todo-form button[type="reset"]:active {
+.todo-form .close-button:active {
   filter: invert(1);
 }
 

@@ -37,9 +37,9 @@
                 <div class="project-details">
                     <h1>Default Project</h1>
                     <div class="project-controls">
-                        <button class="edit-tasks-button"><img src="./images/edit.svg" alt="edit icon" width="20"
+                        <button class="edit-todos-button"><img src="./images/edit.svg" alt="edit icon" width="20"
                                 height="20">Edit Tasks</button><!--Toggle to Cancel Editing Button-->
-                        <button class="add-task-button"><img src="./images/add.svg" alt="add icon" width="20"
+                        <button class="add-todo-button"><img src="./images/add.svg" alt="add icon" width="20"
                                 height="20">Add Task</button><!--Toggle to Delete Checked-->
                     </div>
                 </div>
@@ -107,15 +107,15 @@
                     </li>
                 </ul>
                 <dialog class="todo-dialog">
-                    <form method="dialog" class="todo-form">
-                        <button type="reset"><img src="./images/close.svg" alt="close icon" width="20" height="20"></button>
+                    <form class="todo-form">
+                        <button class="close-button" formmethod="dialog" formnovalidate><img src="./images/close.svg" alt="close icon" width="20" height="20"></button>
                         <div class="todo-form-detail">
                             <h4>Task Information</h4>
                             <span class="note">Fields with (<span class="required">*</span>) are required.</span>
                         </div>
                         <p>
                             <label for="title">Title<span class="required">*</span></label>
-                            <input type="text" name="title" id="title" autofocus>
+                            <input type="text" name="title" id="title" autofocus required>
                         </p>
                         <p>
                             <label for="description">Description</label>
