@@ -8,5 +8,16 @@ query.editTodosButton = document.querySelector('.edit-todos-button');
 query.editTodosButtonIcon = query.editTodosButton.firstElementChild;
 
 query.todoControlButtons = document.querySelectorAll('.todo-controls>*');
-// query.todoControlButtonsIcon = [...query.todoControlButtons].map(button=>button.firstElementChild);
+
+query.saveTodoDialogButton = document.querySelector('.todo-dialog button[value=save]');
+query.todoDialogTitleInput = document.querySelector('.todo-dialog input[name=title]');
+query.todoDialogDescriptionInput = document.querySelector('.todo-dialog input[name=description]');
+query.todoDialogDueDateInput = document.querySelector('.todo-dialog input[name=due-date]');
+query.todoDialogPriorityCheckbox = document.querySelector('.todo-dialog input[name=priority]');
+query.todoDialogNotesTextarea = document.querySelector('.todo-dialog textarea[name=notes]');
+
+query.activeProjectSpan = document.querySelector('.active-project span');
+
+// query.editTodoButtonIcons = document.querySelectorAll('.edit-todo-button img');
+// query.titleTextInput = document.querySelector('.todo-form input[name=title]')
 export { query };

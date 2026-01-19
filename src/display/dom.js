@@ -38,9 +38,9 @@ class DOM {
 };
 
 DOM.registerAction(behavior.showTodoDialog, query.addTodoButton, query.addTodoButtonIcon);
-DOM.registerAction(behavior.showTodoControlButtons, query.editTodosButton, query.editTodosButtonIcon);
-// DOM.registerAction(behavior.logTest, ...query.todoControlButtons,...query.todoControlButtonsIcon);
+DOM.registerAction(behavior.toggleTodoControlButtons, query.editTodosButton, query.editTodosButtonIcon);
+DOM.registerAction(behavior.saveTodoDetails, query.saveTodoDialogButton);
+// DOM.registerAction(behavior.logTest, ...query.editTodoButtonIcons);
 
 DOM.attachClickListener();
-
 export { DOM };
