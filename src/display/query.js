@@ -17,6 +17,11 @@ query.todoDialogPriorityCheckbox = document.querySelector('.todo-dialog input[na
 query.todoDialogNotesTextarea = document.querySelector('.todo-dialog textarea[name=notes]');
 
 query.activeProjectSpan = document.querySelector('.active-project span');
+query.editProjectsButton = document.querySelector('.edit-projects-button');
+query.editProjectsButtonIcon = query.editProjectsButton.firstElementChild;
+
+query.projectNameButtons = document.querySelectorAll('.project-list .project-name');
+query.removeProjectButtonsIcon = document.querySelectorAll('.project-name img[alt=remove]');
 
 // query.editTodoButtonIcons = document.querySelectorAll('.edit-todo-button img');
 // query.titleTextInput = document.querySelector('.todo-form input[name=title]')

@@ -40,6 +40,12 @@ const clearTodoFields = () => {
     query.todoDialog.firstElementChild.reset();
 }
 
+const toggleProjectsControlButtons = () => {
+    query.projectNameButtons.forEach(
+        button => {
+            button.classList.toggle('hide-icon')});
+}
+
 const logTest = (element) => {
     // const todoLabel = element.parentElement.parentElement.previousElementSibling;
     // const todoNumber = todoLabel.getAttribute('for').at(-1); 
@@ -49,4 +55,4 @@ const logTest = (element) => {
 
 
 
-export { showTodoDialog, toggleTodoControlButtons, logTest, saveTodoDetails };
+export { showTodoDialog, toggleTodoControlButtons, logTest, saveTodoDetails, toggleProjectsControlButtons };
