@@ -15,7 +15,8 @@
   --clr-light-950: hsl(0, 0%, 95%);
 
   /* Font Family */
-  --ff-system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+  --ff-system-ui:
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --ff-one: var(--ff-system-ui);
 
@@ -184,7 +185,8 @@ img[alt~="icon"] {
 }
 
 .project-name img:hover {
-  box-shadow: 0 0 0 2px var(--clr-light-700),
+  box-shadow:
+    0 0 0 2px var(--clr-light-700),
     inset 0 0 0 100px var(--clr-light-700);
 }
 
@@ -198,6 +200,21 @@ img[alt~="icon"] {
 
 .hide-icon span {
   margin-right: 0;
+}
+
+.hide-input{
+  display:none;
+}
+
+.new-project .input-project {
+  display: block;
+  margin: 0;
+  margin-left: auto;
+  border: 0;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background-color: var(--clr-primary-300);
+  border-radius: 2rem 0 0 2rem;
 }
 
 .projects-control {
@@ -337,7 +354,8 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   outline-offset: 3px;
 }
 .todo-controls > *:hover {
-  box-shadow: 0 0 0 5px var(--clr-light-700),
+  box-shadow:
+    0 0 0 5px var(--clr-light-700),
     inset 0 0 0 10px var(--clr-light-700);
 }
 .todo-controls > *:active {
@@ -386,7 +404,7 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   text-align: center;
 }
 
-.todo-form-detail span.note{
+.todo-form-detail span.note {
   font-size: var(--fs-small);
   font-weight: 300;
 }
@@ -397,8 +415,8 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   flex-direction: column;
 }
 
-.todo-form input[type=text]{
-  padding: calc(0.075rem/2) 0.5rem;
+.todo-form input[type="text"] {
+  padding: calc(0.075rem / 2) 0.5rem;
 }
 
 .todo-form textarea {
