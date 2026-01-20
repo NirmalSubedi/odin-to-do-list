@@ -6,6 +6,7 @@ query.addTodoButtonIcon = query.addTodoButton.firstElementChild;
 
 query.editTodosButton = document.querySelector('.edit-todos-button');
 query.editTodosButtonIcon = query.editTodosButton.firstElementChild;
+query.editTodosButtonSpan = query.editTodosButton.lastElementChild;
 
 query.todoControlButtons = document.querySelectorAll('.todo-controls>*');
 
@@ -19,6 +20,7 @@ query.todoDialogNotesTextarea = document.querySelector('.todo-dialog textarea[na
 query.activeProjectSpan = document.querySelector('.active-project span');
 query.editProjectsButton = document.querySelector('.edit-projects-button');
 query.editProjectsButtonIcon = query.editProjectsButton.firstElementChild;
+query.editProjectsButtonSpan = query.editProjectsButton.lastElementChild;
 
 query.projectNameButtons = document.querySelectorAll('.project-list .project-name');
 query.removeProjectButtonsIcon = document.querySelectorAll('.project-name img[alt=remove]');
