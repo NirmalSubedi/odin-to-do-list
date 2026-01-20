@@ -6,13 +6,24 @@ class DOM {
 
     static attachClickListener() {
         document.addEventListener('click', DOM.#handleClick);
-    }
+    };
+
+    static attachChangeListener(){
+        document.addEventListener('change',DOM.#handleChange);
+    };
 
     static #handleClick(event) {
+        query.projectInputListItem.classList.add('hide-input');
         const element = event.target;
         const action = DOM.#getAction(element);
         if (action === undefined) return;
         action.start(element);
+    };
+
+    static #handleChange(event) {
+        const element = event.target;
+        if(element !== query.projectInputTextbox) return;
+        behavior.processProjectInput();
     };
 
     static #getAction = (element) => {
@@ -41,7 +52,9 @@ DOM.registerAction(behavior.showTodoDialog, query.addTodoButton, query.addTodoBu
 DOM.registerAction(behavior.toggleTodoControlButtons, query.editTodosButton, query.editTodosButtonIcon, query.editTodosButtonSpan);
 DOM.registerAction(behavior.saveTodoDetails, query.saveTodoDialogButton);
 DOM.registerAction(behavior.toggleProjectsControlButtons, query.editProjectsButton, query.editProjectsButtonIcon, query.editProjectsButtonSpan);
+DOM.registerAction(behavior.showProjectInput, query.addProjectButton, query.addProjectButtonIcon);
 // DOM.registerAction(behavior.logTest, ...query.editTodoButtonIcons);
 
 DOM.attachClickListener();
+DOM.attachChangeListener();
 export { DOM };

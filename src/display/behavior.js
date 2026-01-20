@@ -22,14 +22,14 @@ const toggleTodoControlButtons = () => {
         query.editTodosButtonIcon.setAttribute('alt', 'close icon');
         query.addTodoButtonSpan.textContent = "Delete Tasks";
         query.addTodoButtonIcon.setAttribute('src', removeIcon);
-        query.addTodoButtonIcon.setAttribute('alt','remove icon');
+        query.addTodoButtonIcon.setAttribute('alt', 'remove icon');
     } else {
         query.editTodosButtonSpan.textContent = 'Edit Tasks';
         query.editTodosButtonIcon.setAttribute('src', editIcon);
         query.editTodosButtonIcon.setAttribute('alt', 'edit icon');
         query.addTodoButtonSpan.textContent = "Add Task";
         query.addTodoButtonIcon.setAttribute('src', addIcon);
-        query.addTodoButtonIcon.setAttribute('alt',' icon');
+        query.addTodoButtonIcon.setAttribute('alt', ' icon');
     }
 };
 
@@ -78,6 +78,22 @@ const toggleProjectsControlButtons = () => {
     }
 }
 
+const showProjectInput = () => {
+    query.projectInputListItem.classList.remove('hide-input');
+    query.projectInputTextbox.focus();
+};
+
+const processProjectInput = () => {
+    const inputValue = query.projectInputTextbox.value;
+    query.projectInputListItem.classList.add('hide-input');
+    query.projectInputTextbox.value = '';
+    if(inputValue === "") return;
+    
+    App.createProject(inputValue);
+    // TODO: create element
+    // and render before input
+}
+
 const logTest = (element) => {
     // const todoLabel = element.parentElement.parentElement.previousElementSibling;
     // const todoNumber = todoLabel.getAttribute('for').at(-1); 
@@ -87,4 +103,4 @@ const logTest = (element) => {
 
 
 
-export { showTodoDialog, toggleTodoControlButtons, logTest, saveTodoDetails, toggleProjectsControlButtons };
+export { showTodoDialog, toggleTodoControlButtons, logTest, saveTodoDetails, toggleProjectsControlButtons, showProjectInput, processProjectInput };

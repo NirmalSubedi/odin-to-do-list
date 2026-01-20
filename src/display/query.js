@@ -23,6 +23,11 @@ query.editProjectsButton = document.querySelector('.edit-projects-button');
 query.editProjectsButtonIcon = query.editProjectsButton.firstElementChild;
 query.editProjectsButtonSpan = query.editProjectsButton.lastElementChild;
 
+query.addProjectButton = document.querySelector('.add-project-button');
+query.addProjectButtonIcon = query.addProjectButton.firstElementChild;
+query.projectInputListItem = document.querySelector('.new-project');
+query.projectInputTextbox = document.querySelector('.new-project .input-project');
+
 query.projectNameButtons = document.querySelectorAll('.project-list .project-name');
 query.removeProjectButtonsIcon = document.querySelectorAll('.project-name img[alt=remove]');
 
