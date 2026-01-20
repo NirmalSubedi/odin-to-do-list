@@ -2,6 +2,8 @@ import { query } from "./query.js";
 import { App } from "../logic/app.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
+import removeIcon from "../images/remove.svg";
+import addIcon from "../images/add.svg";
 
 const showTodoDialog = () => {
     query.saveTodoDialogButton.removeAttribute('formnovalidate');
@@ -15,13 +17,19 @@ const toggleTodoControlButtons = () => {
     query.editTodosButton.classList.toggle('showing');
 
     if (query.editTodosButton.classList.contains('showing')) {
-        query.editTodosButton.lastElementChild.textContent = 'Cancel';
+        query.editTodosButtonSpan.textContent = 'Cancel';
         query.editTodosButtonIcon.setAttribute('src', closeIcon);
         query.editTodosButtonIcon.setAttribute('alt', 'close icon');
+        query.addTodoButtonSpan.textContent = "Delete Tasks";
+        query.addTodoButtonIcon.setAttribute('src', removeIcon);
+        query.addTodoButtonIcon.setAttribute('alt','remove icon');
     } else {
-        query.editTodosButton.lastElementChild.textContent = 'Edit Tasks';
+        query.editTodosButtonSpan.textContent = 'Edit Tasks';
         query.editTodosButtonIcon.setAttribute('src', editIcon);
         query.editTodosButtonIcon.setAttribute('alt', 'edit icon');
+        query.addTodoButtonSpan.textContent = "Add Task";
+        query.addTodoButtonIcon.setAttribute('src', addIcon);
+        query.addTodoButtonIcon.setAttribute('alt',' icon');
     }
 };
 
