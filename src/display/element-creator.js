@@ -1,9 +1,9 @@
-function makeElement({ tag = '', text = '', attributes = {} } = {}) {
-    if (tag === '') throw new Error('Must specify element tag.');
+function makeElement({ tag = 'div', text = '', attributes = {}, classes = [] } = {}) {
     const element = document.createElement(tag);
 
     setText(text);
     setAttributes(attributes);
+    setClasses(classes);
 
     function setText(text) {
         if (text.trim() === '') return;
@@ -18,12 +18,10 @@ function makeElement({ tag = '', text = '', attributes = {} } = {}) {
     };
 
     function setClasses(classes) {
-        console.log(classes)
         classes.forEach(cls => element.classList.add(cls));
     };
 
     return element;
 };
-
 
 export { makeElement };

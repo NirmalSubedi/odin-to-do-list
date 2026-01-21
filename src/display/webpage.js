@@ -5,9 +5,10 @@ import { makeElement } from "./element-creator.js";
 
 // create container for the imported elements in render page function
 function renderPage() {
-    document.createElement('div');
-    // renderSidebar(container);
-    // renderMain(container);
+    const container = makeElement({classes: ['app']});
+    console.log(container);
+    renderSidebar(container);
+    renderMain(container);
 }
 
 export { renderPage };
