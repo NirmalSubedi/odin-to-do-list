@@ -15,6 +15,8 @@ const App = {
     getProject(targetProject) {
         return this.projects.find(project => targetProject === project.name);
     }
-}
+};
+
+App.createProject('Default');
 
 export { App };

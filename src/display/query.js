@@ -25,6 +25,7 @@ query.editProjectsButtonSpan = query.editProjectsButton.lastElementChild;
 
 query.addProjectButton = document.querySelector('.add-project-button');
 query.addProjectButtonIcon = query.addProjectButton.firstElementChild;
+query.addProjectButtonSpan = query.addProjectButton.lastElementChild;
 query.projectInputListItem = document.querySelector('.new-project');
 query.projectInputTextbox = document.querySelector('.new-project .input-project');
 

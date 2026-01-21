@@ -55,7 +55,7 @@ DOM.registerAction(behavior.showTodoDialog, query.addTodoButton, query.addTodoBu
 DOM.registerAction(behavior.toggleTodoControlButtons, query.editTodosButton, query.editTodosButtonIcon, query.editTodosButtonSpan);
 DOM.registerAction(behavior.saveTodoDetails, query.saveTodoDialogButton);
 DOM.registerAction(behavior.toggleProjectsControlButtons, query.editProjectsButton, query.editProjectsButtonIcon, query.editProjectsButtonSpan);
-DOM.registerAction(behavior.showProjectInput, query.addProjectButton, query.addProjectButtonIcon);
+DOM.registerAction(behavior.showProjectInput, query.addProjectButton, query.addProjectButtonIcon, query.addProjectButtonSpan);
 // DOM.registerAction(behavior.logTest, ...query.editTodoButtonIcons);
 
 DOM.attachClickListener();

@@ -1,7 +1,8 @@
-// render main section in a function
-// cache elements for events
-function renderMain() {
+import { makeElement } from "./element-creator.js";
+
+// TODO: cache elements for events
+function getMain() {
 
 }
 
-export { renderMain };
+export { getMain };
