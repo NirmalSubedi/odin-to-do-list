@@ -6,7 +6,8 @@ function renderPage() {
     const container = makeElement({classes: ['app']});
     const sidebar = getSidebar();
     const main = getMain();
-    container.appendChild(sidebar, main);
+    container.append(sidebar, main);
+    document.body.append(container);
 }
 
 export { renderPage };

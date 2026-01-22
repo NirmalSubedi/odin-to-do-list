@@ -108,6 +108,5 @@ sidebar.append(h2,ul,div);
 function getSidebar() {
     return sidebar;
 };
-console.log(sidebar);
 
 export { getSidebar };
