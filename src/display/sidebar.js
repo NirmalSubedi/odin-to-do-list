@@ -66,6 +66,7 @@ function makeInputLi() {
         attributes: {
             type: 'text',
             placeholder: 'Name',
+            name: 'project-input',
         },
     });
 

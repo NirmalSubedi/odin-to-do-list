@@ -202,8 +202,8 @@ img[alt~="icon"] {
   margin-right: 0;
 }
 
-.hide-input{
-  display:none;
+.hide-input {
+  display: none;
 }
 
 .new-project .input-project {
@@ -329,6 +329,10 @@ label:has(input[type="checkbox"]:checked) {
   margin: auto;
 }
 
+.hide-tag {
+  display: none;
+}
+
 label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   background-color: transparent;
 }
@@ -419,7 +423,7 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   padding: calc(0.075rem / 2) 0.5rem;
 }
 
-.todo-form input[type="checkbox"]{
+.todo-form input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 

@@ -60,7 +60,7 @@ function makeProjectDetails() {
     return detailsDiv;
 };
 
-const todosUl = makeTodosUl();
+let todosUl = makeTodosUl();
 function makeTodosUl() {
     const ul = makeElement({ tag: 'ul' });
     const lis = currentTodos.map((todo, index) => {
@@ -113,6 +113,8 @@ function makeTodosUl() {
         removeButton.appendChild(removeImg);
         controls.append(editButton, removeButton);
         li.append(label, controls);
+
+        if(todo.priority === false) priorityTag.classList.add('hide-tag');
         return li;
     });
     lis.forEach(li => {
@@ -278,4 +280,10 @@ function getMain() {
     return main;
 };
 
-export { getMain, makeProjectDetails };
+function refreshTodoList() {
+    projectTodosContainer.removeChild(todosUl);
+    todosUl = makeTodosUl();
+    projectTodosContainer.insertBefore(todosUl, todoDialog);
+};
+
+export { getMain, makeProjectDetails, refreshTodoList };

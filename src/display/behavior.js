@@ -1,5 +1,6 @@
 import { query } from "./webpage.js";
 import { App } from "../logic/app.js";
+import { renderPage, refreshTodoList } from "./webpage.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
 import removeIcon from "../images/remove.svg";
@@ -41,7 +42,7 @@ const saveTodoDetails = () => {
     const priorityValue = query.todoDialogPriorityCheckbox.checked;
     const notesValue = query.todoDialogNotesTextarea.value;
 
-    const currentProjectName = query.activeProjectSpan.textContent;
+    const currentProjectName = getCurrentProjectName();
     const currentProject = App.getProject(currentProjectName);
     currentProject.createTodo({
         title: titleValue,
@@ -50,8 +51,9 @@ const saveTodoDetails = () => {
         priority: priorityValue,
         notes: notesValue,
     });
-    // TODO: render addition (preview)
 
+    console.log(App.getProject(currentProjectName).getTodo(titleValue))
+    refreshTodoList();
 
     clearTodoFields();
 }
@@ -87,11 +89,19 @@ const processProjectInput = () => {
     const inputValue = query.projectInputTextbox.value;
     query.projectInputListItem.classList.add('hide-input');
     query.projectInputTextbox.value = '';
-    if(inputValue === "") return;
-    
+    if (inputValue === "") return;
+
     App.createProject(inputValue);
     // TODO: create element
     // and render before input
+};
+
+const getCurrentProjectName = () => {
+    const button = query.projectNameButtons.find(project=>{
+        return project.parentElement.classList.contains('active-project');
+    });
+    const name = button.firstElementChild.textContent;
+    return name;
 }
 
 const logTest = (element) => {
