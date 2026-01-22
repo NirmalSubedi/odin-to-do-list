@@ -1,5 +1,6 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
+import { cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields } from "./cache.js";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
 import removeIcon from "../images/remove.svg";
@@ -12,8 +13,8 @@ function getCurrentProjectName() {
     return App.getProject('Default').name;
 }
 
-const main = makeElement({classes:['main']});
-const projectTodosContainer = makeElement({classes:['project-todos']});
+const main = makeElement({ classes: ['main'] });
+const projectTodosContainer = makeElement({ classes: ['project-todos'] });
 
 const projectDetails = makeProjectDetails();
 function makeProjectDetails() {
@@ -47,7 +48,16 @@ function makeProjectDetails() {
     addButton.append(addImg, addSpan);
     controls.append(editButton, addButton);
     detailsDiv.append(h1, controls);
-    return detailsDiv;
+
+    cacheProjectDetails({
+        addTodoButton: addButton,
+        addTodoButtonIcon: addImg,
+        addTodoButtonSpan: addSpan,
+        editTodosButton: editButton,
+        editTodosButtonIcon: editImg,
+        editTodosButtonSpan: editSpan,
+    })
+    return { detailsDiv };
 };
 
 const todosUl = makeTodosUl();
@@ -107,6 +117,7 @@ function makeTodosUl() {
     });
     lis.forEach(li => {
         ul.appendChild(li);
+        cacheTodoControlButtons(li);
     });
     return ul;
 };
@@ -142,7 +153,7 @@ function makeTodoDialog() {
     const disclaimer = makeElement({ tag: 'span', classes: ['note'] });
     const disclaimerText1 = document.createTextNode('Fields with (');
     const disclaimerText2 = document.createTextNode(') are required.');
-    const requiredSpan = makeElement({ tag: 'span', text: '*', classes:['required'] });
+    const requiredSpan = makeElement({ tag: 'span', text: '*', classes: ['required'] });
     const titleContainer = makeElement({ tag: 'p' });
     const titleLabel = makeElement({
         tag: 'label',
@@ -246,6 +257,15 @@ function makeTodoDialog() {
     notesContainer.append(notesLabel, notesField);
     form.append(closeButton, details, titleContainer, descriptionContainer, dueDateContainer, priorityContainer, notesContainer, submitButton);
     dialog.appendChild(form);
+
+    cacheTodoDialogFields({
+        saveTodoDialogButton: submitButton,
+        todoDialogTitleInput: titleField,
+        todoDialogDescriptionInput: descriptionField,
+        todoDialogDueDateInput: dueDateField,
+        todoDialogPriorityCheckbox: priorityField,
+        todoDialogNotesTextarea: notesField,
+    });
     return dialog;
 };
 
@@ -258,4 +278,4 @@ function getMain() {
     return main;
 };
 
-export { getMain };
+export { getMain, makeProjectDetails };

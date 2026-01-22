@@ -1,5 +1,6 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
+import { cacheProjectsControlButtons, cacheNewProjectLi, cacheProjectNameButtons, cacheRemoveButtonsIcon } from "./cache.js";
 import removeIcon from "../images/remove.svg";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
@@ -29,6 +30,8 @@ const lis = projects.map((project, index) => {
 
         button.appendChild(span);
         li.appendChild(button);
+
+        cacheProjectNameButtons(button);
         return li;
     }
 
@@ -48,6 +51,9 @@ const lis = projects.map((project, index) => {
 
     button.append(span, img);
     li.appendChild(button);
+
+    cacheProjectNameButtons(button);
+    cacheRemoveButtonsIcon(img);
     return li;
 });
 
@@ -64,6 +70,7 @@ function makeInputLi() {
     });
 
     li.appendChild(input);
+    cacheNewProjectLi(li,input);
     return li;
 };
 lis.push(inputLi);
@@ -99,6 +106,8 @@ function makeProjectsControl() {
     editButton.append(editImg,editSpan);
     addButton.append(addImg, addSpan),
     div.append(editButton,addButton);
+
+    cacheProjectsControlButtons(div);
     return div;
 };
 

@@ -1,4 +1,4 @@
-import { query } from "./query.js";
+import { query } from "./webpage.js";
 import { App } from "../logic/app.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
