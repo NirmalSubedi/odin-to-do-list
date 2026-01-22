@@ -1,7 +1,6 @@
 import { getMain } from "./main-content.js";
 import { getSidebar } from "./sidebar.js";
 import { makeElement } from "./element-creator.js";
-import { query } from "./query.js";
 import { cache } from "./cache.js";
 
 function renderPage() {
@@ -12,6 +11,5 @@ function renderPage() {
     document.body.append(container);
 };
 
-Object.assign(query, cache);
 
-export { renderPage, query };
+export { renderPage, cache as query};

@@ -113,7 +113,6 @@ function makeProjectsControl() {
 
 sidebar.append(h2,ul,div);
 
-// TODO: cache elements for events
 function getSidebar() {
     return sidebar;
 };

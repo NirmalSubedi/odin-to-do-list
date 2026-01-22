@@ -419,6 +419,10 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   padding: calc(0.075rem / 2) 0.5rem;
 }
 
+.todo-form input[type="checkbox"]{
+  margin-right: 0.5rem;
+}
+
 .todo-form textarea {
   resize: none;
   padding-left: 0.5rem;

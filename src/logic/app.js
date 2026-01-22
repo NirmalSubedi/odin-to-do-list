@@ -17,6 +17,6 @@ const App = {
     }
 };
 
-App.createProject('Default');
+App.createProject('Home');
 
 export { App };

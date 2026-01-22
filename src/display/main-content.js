@@ -1,6 +1,6 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
-import { cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields } from "./cache.js";
+import { cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields, cacheTodoDialog } from "./cache.js";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
 import removeIcon from "../images/remove.svg";
@@ -10,7 +10,7 @@ import closeIcon from "../images/close.svg";
 const currentProject = getCurrentProjectName();
 const currentTodos = App.getProject(currentProject).todos;
 function getCurrentProjectName() {
-    return App.getProject('Default').name;
+    return App.getProject('Home').name;
 }
 
 const main = makeElement({ classes: ['main'] });
@@ -57,7 +57,7 @@ function makeProjectDetails() {
         editTodosButtonIcon: editImg,
         editTodosButtonSpan: editSpan,
     })
-    return { detailsDiv };
+    return detailsDiv;
 };
 
 const todosUl = makeTodosUl();
@@ -272,8 +272,8 @@ function makeTodoDialog() {
 projectTodosContainer.append(projectDetails, todosUl, todoDialog);
 main.append(projectTodosContainer);
 
+cacheTodoDialog(todoDialog);
 
-// TODO: cache elements for events
 function getMain() {
     return main;
 };

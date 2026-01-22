@@ -2,8 +2,10 @@ const cache = {
     todoControlButtons: [],
     projectNameButtons: [],
     removeProjectButtonsIcon: [],
+    editTodoButtonIcons: [],
 };
 
+// Main
 function cacheProjectDetails(obj) {
     Object.entries(obj).forEach(([key, value]) => {
         cache[key] = value;
@@ -13,9 +15,15 @@ function cacheProjectDetails(obj) {
 function cacheTodoControlButtons(listItem) {
     const todoControls = [];
     const editButton = listItem.lastElementChild.firstElementChild;
+    const editImg = editButton.firstElementChild;
     const removeButton = listItem.lastElementChild.lastElementChild;
+    cache.editTodoButtonIcons.push(editImg);
     todoControls.push(editButton, removeButton);
     cache.todoControlButtons.push(todoControls);
+};
+
+function cacheTodoDialog (dialog){
+    cache.todoDialog = dialog;
 };
 
 function cacheTodoDialogFields(obj) {
@@ -24,6 +32,7 @@ function cacheTodoDialogFields(obj) {
     });
 };
 
+// SideBar
 function cacheProjectsControlButtons(controlsDiv) {
     cache.editProjectsButton = controlsDiv.firstElementChild;
     cache.editProjectsButtonIcon = cache.editProjectsButton.firstElementChild;
@@ -47,4 +56,14 @@ function cacheRemoveButtonsIcon(img) {
     cache.removeProjectButtonsIcon.push(img);
 };
 
-export { cache, cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields, cacheProjectsControlButtons, cacheNewProjectLi, cacheProjectNameButtons, cacheRemoveButtonsIcon };
+
+export { 
+    cache, 
+    cacheProjectDetails, 
+    cacheTodoControlButtons, 
+    cacheTodoDialogFields, 
+    cacheProjectsControlButtons, 
+    cacheNewProjectLi, 
+    cacheProjectNameButtons, 
+    cacheRemoveButtonsIcon, 
+    cacheTodoDialog };
