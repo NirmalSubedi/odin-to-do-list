@@ -12,8 +12,9 @@ const showTodoDialog = () => {
 };
 
 const toggleTodoControlButtons = () => {
-    query.todoControlButtons.forEach(button => {
-        button.classList.toggle('hide-button');
+    query.todoControlButtons.forEach(([editButton, removeButton]) => {
+        editButton.classList.toggle('hide-button');
+        removeButton.classList.toggle('hide-button');
     });
     query.editTodosButton.classList.toggle('showing');
 
@@ -52,9 +53,7 @@ const saveTodoDetails = () => {
         notes: notesValue,
     });
 
-    console.log(App.getProject(currentProjectName).getTodo(titleValue))
     refreshTodoList();
-
     clearTodoFields();
 }
 

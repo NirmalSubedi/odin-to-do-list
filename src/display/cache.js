@@ -3,6 +3,7 @@ const cache = {
     projectNameButtons: [],
     removeProjectButtonsIcon: [],
     editTodoButtonIcons: [],
+    removeTodoButtonIcons: [],
 };
 
 // Main
@@ -17,7 +18,9 @@ function cacheTodoControlButtons(listItem) {
     const editButton = listItem.lastElementChild.firstElementChild;
     const editImg = editButton.firstElementChild;
     const removeButton = listItem.lastElementChild.lastElementChild;
+    const removeImg = removeButton.firstElementChild;
     cache.editTodoButtonIcons.push(editImg);
+    cache.removeTodoButtonIcons.push(removeImg);
     todoControls.push(editButton, removeButton);
     cache.todoControlButtons.push(todoControls);
 };

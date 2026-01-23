@@ -372,13 +372,13 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
 
 .todo-dialog {
   border: 2px solid var(--clr-text);
+  background-color: var(--clr-bg);
 }
 
 .todo-dialog .todo-form {
   display: grid;
   gap: 1rem;
   width: 50vmin;
-  background-color: var(--clr-bg);
   color: var(--clr-text);
 }
 
