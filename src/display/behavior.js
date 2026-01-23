@@ -1,6 +1,6 @@
 import { query } from "./webpage.js";
 import { App } from "../logic/app.js";
-import { renderPage, refreshTodoList } from "./webpage.js";
+import { refreshTodoList, refreshProjectList } from "./webpage.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
 import removeIcon from "../images/remove.svg";
@@ -91,8 +91,7 @@ const processProjectInput = () => {
     if (inputValue === "") return;
 
     App.createProject(inputValue);
-    // TODO: create element
-    // and render before input
+    refreshProjectList();
 };
 
 const getCurrentProjectName = () => {
