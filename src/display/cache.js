@@ -6,6 +6,14 @@ const cache = {
     removeTodoButtonIcons: [],
 };
 
+function uncache(key) {
+    cache[key].length = 0;
+};
+
+function removeCache(key) {
+    delete cache[key];
+};
+
 // Main
 function cacheProjectDetails(obj) {
     Object.entries(obj).forEach(([key, value]) => {
