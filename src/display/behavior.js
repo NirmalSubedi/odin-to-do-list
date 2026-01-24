@@ -1,47 +1,47 @@
-import { query } from "./webpage.js";
 import { App } from "../logic/app.js";
-import { refreshTodoList, refreshProjectList } from "./webpage.js";
+import { cache, renderPage, refreshTodoList, refreshProjectList, refreshProjectsControl } from "./webpage.js";
+import { getAction, registerAction } from "./actions.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
 import removeIcon from "../images/remove.svg";
 import addIcon from "../images/add.svg";
 
 const showTodoDialog = () => {
-    query.saveTodoDialogButton.removeAttribute('formnovalidate');
-    query.todoDialog.showModal();
+    cache.saveTodoDialogButton.removeAttribute('formnovalidate');
+    cache.todoDialog.showModal();
 };
 
 const toggleTodoControlButtons = () => {
-    query.todoControlButtons.forEach(([editButton, removeButton]) => {
+    cache.todoControlButtons.forEach(([editButton, removeButton]) => {
         editButton.classList.toggle('hide-button');
         removeButton.classList.toggle('hide-button');
     });
-    query.editTodosButton.classList.toggle('showing');
+    cache.editTodosButton.classList.toggle('showing');
 
-    if (query.editTodosButton.classList.contains('showing')) {
-        query.editTodosButtonSpan.textContent = 'Cancel';
-        query.editTodosButtonIcon.setAttribute('src', closeIcon);
-        query.editTodosButtonIcon.setAttribute('alt', 'close icon');
-        query.addTodoButtonSpan.textContent = "Delete Tasks";
-        query.addTodoButtonIcon.setAttribute('src', removeIcon);
-        query.addTodoButtonIcon.setAttribute('alt', 'remove icon');
+    if (cache.editTodosButton.classList.contains('showing')) {
+        cache.editTodosButtonSpan.textContent = 'Cancel';
+        cache.editTodosButtonIcon.setAttribute('src', closeIcon);
+        cache.editTodosButtonIcon.setAttribute('alt', 'close icon');
+        cache.addTodoButtonSpan.textContent = "Delete Tasks";
+        cache.addTodoButtonIcon.setAttribute('src', removeIcon);
+        cache.addTodoButtonIcon.setAttribute('alt', 'remove icon');
     } else {
-        query.editTodosButtonSpan.textContent = 'Edit Tasks';
-        query.editTodosButtonIcon.setAttribute('src', editIcon);
-        query.editTodosButtonIcon.setAttribute('alt', 'edit icon');
-        query.addTodoButtonSpan.textContent = "Add Task";
-        query.addTodoButtonIcon.setAttribute('src', addIcon);
-        query.addTodoButtonIcon.setAttribute('alt', ' icon');
+        cache.editTodosButtonSpan.textContent = 'Edit Tasks';
+        cache.editTodosButtonIcon.setAttribute('src', editIcon);
+        cache.editTodosButtonIcon.setAttribute('alt', 'edit icon');
+        cache.addTodoButtonSpan.textContent = "Add Task";
+        cache.addTodoButtonIcon.setAttribute('src', addIcon);
+        cache.addTodoButtonIcon.setAttribute('alt', ' icon');
     }
 };
 
 const saveTodoDetails = () => {
-    const titleValue = query.todoDialogTitleInput.value;
+    const titleValue = cache.todoDialogTitleInput.value;
     if (titleValue === '') return 'Title is required!';
-    const descriptionValue = query.todoDialogDescriptionInput.value;
-    const dueDateValue = query.todoDialogDueDateInput.value;
-    const priorityValue = query.todoDialogPriorityCheckbox.checked;
-    const notesValue = query.todoDialogNotesTextarea.value;
+    const descriptionValue = cache.todoDialogDescriptionInput.value;
+    const dueDateValue = cache.todoDialogDueDateInput.value;
+    const priorityValue = cache.todoDialogPriorityCheckbox.checked;
+    const notesValue = cache.todoDialogNotesTextarea.value;
 
     const currentProjectName = getCurrentProjectName();
     const currentProject = App.getProject(currentProjectName);
@@ -58,36 +58,38 @@ const saveTodoDetails = () => {
 }
 
 const clearTodoFields = () => {
-    query.saveTodoDialogButton.setAttribute('formnovalidate', true);
-    query.todoDialog.firstElementChild.reset();
+    cache.saveTodoDialogButton.setAttribute('formnovalidate', true);
+    cache.todoDialog.firstElementChild.reset();
 }
 
 const toggleProjectsControlButtons = () => {
-    query.projectNameButtons.forEach(
+    console.log(cache.projectNameButtons)
+    console.log(cache.editProjectsButton)
+    cache.projectNameButtons.forEach(
         button => {
             button.classList.toggle('hide-icon')
         });
-    query.editProjectsButton.classList.toggle('showing');
-    if (query.editProjectsButton.classList.contains('showing')) {
-        query.editProjectsButtonSpan.textContent = "Cancel";
-        query.editProjectsButtonIcon.setAttribute('src', closeIcon);
-        query.editProjectsButtonIcon.setAttribute('alt', 'close icon');
+    cache.editProjectsButton.classList.toggle('showing');
+    if (cache.editProjectsButton.classList.contains('showing')) {
+        cache.editProjectsButtonSpan.textContent = "Cancel";
+        cache.editProjectsButtonIcon.setAttribute('src', closeIcon);
+        cache.editProjectsButtonIcon.setAttribute('alt', 'close icon');
     } else {
-        query.editProjectsButtonSpan.textContent = "Edit";
-        query.editProjectsButtonIcon.setAttribute('src', editIcon);
-        query.editProjectsButtonIcon.setAttribute('alt', 'edit icon');
+        cache.editProjectsButtonSpan.textContent = "Edit";
+        cache.editProjectsButtonIcon.setAttribute('src', editIcon);
+        cache.editProjectsButtonIcon.setAttribute('alt', 'edit icon');
     }
 }
 
 const showProjectInput = () => {
-    query.projectInputListItem.classList.remove('hide-input');
-    query.projectInputTextbox.focus();
+    cache.projectInputListItem.classList.remove('hide-input');
+    cache.projectInputTextbox.focus();
 };
 
 const processProjectInput = () => {
-    const inputValue = query.projectInputTextbox.value;
-    query.projectInputListItem.classList.add('hide-input');
-    query.projectInputTextbox.value = '';
+    const inputValue = cache.projectInputTextbox.value;
+    cache.projectInputListItem.classList.add('hide-input');
+    cache.projectInputTextbox.value = '';
     if (inputValue === "") return;
 
     App.createProject(inputValue);
@@ -95,20 +97,47 @@ const processProjectInput = () => {
 };
 
 const getCurrentProjectName = () => {
-    const button = query.projectNameButtons.find(project=>{
+    const button = cache.projectNameButtons.find(project => {
         return project.parentElement.classList.contains('active-project');
     });
     const name = button.firstElementChild.textContent;
     return name;
 }
 
+const removeProject = (element) => {
+    const span = element.previousElementSibling;
+    const projectName = span.textContent;
+    App.deleteProject(projectName);
+    refreshProjectList();
+    // refreshProjectsControl();
+};
+
 const logTest = (element) => {
     // const todoLabel = element.parentElement.parentElement.previousElementSibling;
     // const todoNumber = todoLabel.getAttribute('for').at(-1); 
-    // query.titleTextInput.value = todoNumber;
-    // query.todoDialog.showModal();
+    // cache.titleTextInput.value = todoNumber;
+    // cache.todoDialog.showModal();
 };
 
+renderPage();
+registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
+registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
+registerAction(saveTodoDetails, cache.saveTodoDialogButton);
+registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
+registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
+registerAction(removeProject, ...cache.removeProjectButtonsIcon);
 
 
-export { showTodoDialog, toggleTodoControlButtons, logTest, saveTodoDetails, toggleProjectsControlButtons, showProjectInput, processProjectInput };
+export {
+    App,
+    cache,
+    getAction, 
+    showTodoDialog,
+    toggleTodoControlButtons,
+    saveTodoDetails,
+    toggleProjectsControlButtons,
+    showProjectInput,
+    processProjectInput,
+    removeProject,
+    logTest,
+};

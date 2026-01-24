@@ -10,7 +10,7 @@ const App = {
     },
 
     deleteProject(targetProject) {
-        const targetProjectIndex = this.projects.findIndex(project => targetProject.name === project.name);
+        const targetProjectIndex = this.projects.findIndex(project => targetProject === project.name);
         this.projects.splice(targetProjectIndex, 1);
     },
 

@@ -1,10 +1,8 @@
-import { getMain, refreshTodoList } from "./main-content.js";
-import { getSidebar, refreshProjectList } from "./sidebar.js";
+import { cache, getMain, refreshTodoList } from "./main-content.js";
+import { getSidebar, refreshProjectList, refreshProjectsControl } from "./sidebar.js";
 import { makeElement } from "./element-creator.js";
-import { cache } from "./cache.js";
 
 function renderPage() {
-    document.body.textContent = "";
     const container = makeElement({ classes: ['app'] });
     const sidebar = getSidebar();
     const main = getMain();
@@ -12,4 +10,4 @@ function renderPage() {
     document.body.append(container);
 };
 
-export { renderPage, cache as query, refreshTodoList, refreshProjectList };
+export { renderPage, cache, refreshTodoList, refreshProjectList, refreshProjectsControl };

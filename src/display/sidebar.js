@@ -83,7 +83,7 @@ function makeProjectsUl() {
 };
 
 
-const div = makeProjectsControl();
+let div = makeProjectsControl();
 function makeProjectsControl() {
     const div = makeElement({ classes: ['projects-control'] });
     const editButton = makeElement({ tag: 'button', classes: ['edit-projects-button'] });
@@ -128,4 +128,11 @@ function refreshProjectList() {
     sidebar.insertBefore(ul, div);
 };
 
-export { getSidebar, refreshProjectList };
+function refreshProjectsControl(){
+    sidebar.removeChild(div);
+    div = makeProjectsControl();
+    sidebar.appendChild(div);
+    console.log('project controls')
+}
+
+export { getSidebar, refreshProjectList, refreshProjectsControl };

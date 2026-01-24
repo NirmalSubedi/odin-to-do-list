@@ -1,6 +1,6 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
-import { cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields, cacheTodoDialog } from "./cache.js";
+import { cache, cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields, cacheTodoDialog } from "./cache.js";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
 import removeIcon from "../images/remove.svg";
@@ -114,7 +114,7 @@ function makeTodosUl() {
         controls.append(editButton, removeButton);
         li.append(label, controls);
 
-        if(todo.priority === false) priorityTag.classList.add('hide-tag');
+        if (todo.priority === false) priorityTag.classList.add('hide-tag');
         return li;
     });
     lis.forEach(li => {
@@ -286,4 +286,4 @@ function refreshTodoList() {
     projectTodosContainer.insertBefore(todosUl, todoDialog);
 };
 
-export { getMain, makeProjectDetails, refreshTodoList };
+export { cache, getMain, makeProjectDetails, refreshTodoList };
