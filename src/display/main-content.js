@@ -6,11 +6,8 @@ import removeIcon from "../images/remove.svg";
 import closeIcon from "../images/close.svg";
 
 
-const currentProject = getCurrentProjectName();
-const currentTodos = App.getProject(currentProject).todos;
-function getCurrentProjectName() {
-    return App.getProject('Home').name;
-}
+const defaultProject = App.projects[0].name;
+const defaultTodos = App.getProject(defaultProject).todos;
 
 const main = makeElement({ classes: ['main'] });
 const projectTodosContainer = makeElement({ classes: ['project-todos'] });
@@ -18,7 +15,7 @@ const projectTodosContainer = makeElement({ classes: ['project-todos'] });
 const projectDetails = makeProjectDetails();
 function makeProjectDetails() {
     const detailsDiv = makeElement({ classes: ['project-details'] });
-    const h1 = makeElement({ tag: 'h1', text: `${currentProject}` });
+    const h1 = makeElement({ tag: 'h1', text: `${defaultProject}` });
     const controls = makeElement({ classes: ['project-controls'] });
     const editButton = makeElement({ tag: 'button', classes: ['edit-todos-button'] });
     const addButton = makeElement({ tag: 'button', classes: ['add-todo-button'] });
@@ -54,7 +51,7 @@ function makeProjectDetails() {
 let todosUl = makeTodosUl();
 function makeTodosUl() {
     const ul = makeElement({ tag: 'ul' });
-    const lis = currentTodos.map((todo, index) => {
+    const lis = defaultTodos.map((todo, index) => {
         const li = makeElement({ tag: 'li' });
         const label = makeElement({
             tag: 'label',

@@ -1,7 +1,9 @@
 import { Project } from "./project.js";
 
 const App = {
-    projects: [],
+    projects: [
+        new Project('Home'),
+    ],
 
     createProject(name) {
         if(this.isDuplicateProject(name)) throw new Error("Same name Project already exists!");
@@ -24,7 +26,6 @@ const App = {
     },
 };
 
-App.createProject('Home');
 App.createProject('About');
 App.createProject('Contact');
 
