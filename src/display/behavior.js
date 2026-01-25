@@ -1,6 +1,6 @@
 import { App } from "../logic/app.js";
 import { cache } from "./cache.js";
-import { getAction, registerAction } from "./actions.js";
+import { getAction, registerAction, unregisterAction, getRegistration } from "./actions.js";
 import { makeTodosUl } from "./main-content.js";
 import { makeProjectsUl } from "./sidebar.js";
 import editIcon from "../images/edit.svg";
@@ -15,13 +15,21 @@ const showProjectInput = () => {
 };
 
 const processProjectInput = () => {
-    const inputValue = cache.projectInputTextbox.value;
+    const inputLi = cache.projectInputListItem;
+    const inputValue = inputLi.firstElementChild.value;
     cache.projectInputListItem.classList.add('hide-input');
     cache.projectInputTextbox.value = '';
-    if (inputValue === "") return;
+    if (inputValue.trim() === "") return;
 
     App.createProject(inputValue);
-    
+
+    const previousLiRemoveIcon = inputLi.previousElementSibling.firstElementChild.lastElementChild;
+    if (getRegistration(removeProject) !== undefined) unregisterAction(previousLiRemoveIcon);
+    refreshProjectList();
+    registerAction(removeProject, ...cache.sidebar.querySelectorAll('.project-name img'));
+};
+
+const refreshProjectList = () => {
     cache.sidebar.removeChild(cache.sidebar.querySelector('ul'));
     cache.sidebar.insertBefore(makeProjectsUl(), cache.sidebar.lastElementChild);
 
@@ -40,7 +48,33 @@ const removeProject = (element) => {
     const projectName = span.textContent;
     App.deleteProject(projectName);
 
+    unregisterAction(element);
     refreshProjectList();
+    registerAction(removeProject, ...cache.sidebar.querySelectorAll('.project-name img'));
+    toggleProjectsEditButton();
+};
+
+const toggleProjectsControlButtons = () => {
+    toggleProjectNameIcons();
+    toggleProjectsEditButton();
+};
+
+const toggleProjectNameIcons = () => {
+    const projectNameButtons = cache.sidebar.querySelectorAll('button.project-name');
+    projectNameButtons.forEach(button => button.classList.toggle('hide-icon'));
+};
+
+const toggleProjectsEditButton = () => {
+    cache.editProjectsButton.classList.toggle('showing');
+    if (cache.editProjectsButton.classList.contains('showing')) {
+        cache.editProjectsButtonSpan.textContent = 'Cancel';
+        cache.editProjectsButtonIcon.setAttribute('src', closeIcon);
+        cache.editProjectsButtonIcon.setAttribute('alt', 'close icon');
+    } else {
+        cache.editProjectsButtonSpan.textContent = 'Edit';
+        cache.editProjectsButtonIcon.setAttribute('src', editIcon);
+        cache.editProjectsButtonIcon.setAttribute('alt', 'edit icon');
+    };
 };
 
 // Main
@@ -102,28 +136,12 @@ const clearTodoFields = () => {
     cache.todoDialogForm.reset();
 };
 
-const toggleProjectsControlButtons = () => {
-    cache.projectNameButtons.forEach(
-        button => {
-            button.classList.toggle('hide-icon')
-        });
-    cache.editProjectsButton.classList.toggle('showing');
-    if (cache.editProjectsButton.classList.contains('showing')) {
-        cache.editProjectsButtonSpan.textContent = "Cancel";
-        cache.editProjectsButtonIcon.setAttribute('src', closeIcon);
-        cache.editProjectsButtonIcon.setAttribute('alt', 'close icon');
-    } else {
-        cache.editProjectsButtonSpan.textContent = "Edit";
-        cache.editProjectsButtonIcon.setAttribute('src', editIcon);
-        cache.editProjectsButtonIcon.setAttribute('alt', 'edit icon');
-    };
-};
 
 
 // sidebar
-// registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
+registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
 registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
-// registerAction(removeProject, ...cache.removeProjectButtonsIcon);
+registerAction(removeProject, ...cache.sidebar.querySelectorAll('button.project-name img'));
 
 // main
 registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
