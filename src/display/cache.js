@@ -1,80 +1,37 @@
-const cache = {
-    todoControlButtons: [],
-    projectNameButtons: [],
-    removeProjectButtonsIcon: [],
-    editTodoButtonIcons: [],
-    removeTodoButtonIcons: [],
-};
+import "./webpage.js";
 
-function uncache(key) {
-    cache[key].length = 0;
-};
-
-function removeCache(key) {
-    delete cache[key];
-};
-
-// Main
-function cacheProjectDetails(obj) {
-    Object.entries(obj).forEach(([key, value]) => {
-        cache[key] = value;
-    });
-};
-
-function cacheTodoControlButtons(listItem) {
-    const todoControls = [];
-    const editButton = listItem.lastElementChild.firstElementChild;
-    const editImg = editButton.firstElementChild;
-    const removeButton = listItem.lastElementChild.lastElementChild;
-    const removeImg = removeButton.firstElementChild;
-    cache.editTodoButtonIcons.push(editImg);
-    cache.removeTodoButtonIcons.push(removeImg);
-    todoControls.push(editButton, removeButton);
-    cache.todoControlButtons.push(todoControls);
-};
-
-function cacheTodoDialog (dialog){
-    cache.todoDialog = dialog;
-};
-
-function cacheTodoDialogFields(obj) {
-    Object.entries(obj).forEach(([key, value]) => {
-        cache[key] = value;
-    });
-};
+const cache = {};
 
 // SideBar
-function cacheProjectsControlButtons(controlsDiv) {
-    cache.editProjectsButton = controlsDiv.firstElementChild;
-    cache.editProjectsButtonIcon = cache.editProjectsButton.firstElementChild;
-    cache.editProjectsButtonSpan = cache.editProjectsButton.lastElementChild;
+cache.projectInputListItem = document.querySelector('li.new-project');
+cache.projectInputTextbox = cache.projectInputListItem.querySelector('input[type=text]');
 
-    cache.addProjectButton = controlsDiv.lastElementChild;
-    cache.addProjectButtonIcon = cache.addProjectButton.firstElementChild;
-    cache.addProjectButtonSpan = cache.addProjectButton.lastElementChild;
-};
+cache.editProjectsButton = document.querySelector('button.edit-projects-button');
+cache.editProjectsButtonIcon = cache.editProjectsButton.querySelector('img');
+cache.editProjectsButtonSpan = cache.editProjectsButton.querySelector('span');
 
-function cacheNewProjectLi(li, input) {
-    cache.projectInputListItem = li;
-    cache.projectInputTextbox = input;
-};
+cache.addProjectButton = document.querySelector('button.add-project-button');
+cache.editProjectsButtonImg = cache.addProjectButton.querySelector('img');
+cache.editProjectsButtonSpan = cache.addProjectButton.querySelector('span');
 
-function cacheProjectNameButtons(button) {
-    cache.projectNameButtons.push(button);
-};
+// Main
+cache.addTodoButton = document.querySelector('.add-todo-button');
+cache.addTodoButtonIcon = document.querySelector('.add-todo-button img');
+cache.addTodoButtonSpan = document.querySelector('.add-todo-button span');
+cache.editTodosButton = document.querySelector('.edit-todos-button');
+cache.editTodosButtonIcon = document.querySelector('.edit-todos-button img');
+cache.editTodosButtonSpan = document.querySelector('.edit-todos-button span');
 
-function cacheRemoveButtonsIcon(img) {
-    cache.removeProjectButtonsIcon.push(img);
-};
+cache.todoDialog = document.querySelector('.todo-dialog');
+cache.todoDialogForm = cache.todoDialog.querySelector('form.todo-form');
+cache.todoDialogCloseButton = cache.todoDialog.querySelector('button[class=close-button]')
+cache.todoDialogTitleInput = cache.todoDialog.querySelector('input[name=title]');
+cache.todoDialogDescriptionInput = cache.todoDialog.querySelector('input[name=description]');
+cache.todoDialogDueDateInput = cache.todoDialog.querySelector('input[name=due-date]');
+cache.todoDialogPriorityCheckbox = cache.todoDialog.querySelector('input[name=priority]');
+cache.todoDialogNotesTextarea = cache.todoDialog.querySelector('textarea[name=notes]');
+cache.saveTodoDialogButton = cache.todoDialog.querySelector('button[type=submit]');
 
 
-export { 
-    cache, 
-    cacheProjectDetails, 
-    cacheTodoControlButtons, 
-    cacheTodoDialogFields, 
-    cacheProjectsControlButtons, 
-    cacheNewProjectLi, 
-    cacheProjectNameButtons, 
-    cacheRemoveButtonsIcon, 
-    cacheTodoDialog };
+
+export { cache };

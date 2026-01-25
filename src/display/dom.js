@@ -26,9 +26,6 @@ class DOM {
 
 };
 
-console.log(cache)
-console.log(cache.removeProjectButtonsIcon);
-
 
 DOM.attachClickListener();
 DOM.attachChangeListener();

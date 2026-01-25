@@ -1,6 +1,5 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
-import { cache, cacheProjectDetails, cacheTodoControlButtons, cacheTodoDialogFields, cacheTodoDialog } from "./cache.js";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
 import removeIcon from "../images/remove.svg";
@@ -49,14 +48,6 @@ function makeProjectDetails() {
     controls.append(editButton, addButton);
     detailsDiv.append(h1, controls);
 
-    cacheProjectDetails({
-        addTodoButton: addButton,
-        addTodoButtonIcon: addImg,
-        addTodoButtonSpan: addSpan,
-        editTodosButton: editButton,
-        editTodosButtonIcon: editImg,
-        editTodosButtonSpan: editSpan,
-    })
     return detailsDiv;
 };
 
@@ -119,7 +110,6 @@ function makeTodosUl() {
     });
     lis.forEach(li => {
         ul.appendChild(li);
-        cacheTodoControlButtons(li);
     });
     return ul;
 };
@@ -260,30 +250,14 @@ function makeTodoDialog() {
     form.append(closeButton, details, titleContainer, descriptionContainer, dueDateContainer, priorityContainer, notesContainer, submitButton);
     dialog.appendChild(form);
 
-    cacheTodoDialogFields({
-        saveTodoDialogButton: submitButton,
-        todoDialogTitleInput: titleField,
-        todoDialogDescriptionInput: descriptionField,
-        todoDialogDueDateInput: dueDateField,
-        todoDialogPriorityCheckbox: priorityField,
-        todoDialogNotesTextarea: notesField,
-    });
     return dialog;
 };
 
 projectTodosContainer.append(projectDetails, todosUl, todoDialog);
 main.append(projectTodosContainer);
 
-cacheTodoDialog(todoDialog);
-
 function getMain() {
     return main;
 };
 
-function refreshTodoList() {
-    projectTodosContainer.removeChild(todosUl);
-    todosUl = makeTodosUl();
-    projectTodosContainer.insertBefore(todosUl, todoDialog);
-};
-
-export { cache, getMain, makeProjectDetails, refreshTodoList };
+export { getMain };

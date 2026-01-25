@@ -1,5 +1,5 @@
-import { cache, getMain, refreshTodoList } from "./main-content.js";
-import { getSidebar, refreshProjectList, refreshProjectsControl } from "./sidebar.js";
+import { getMain } from "./main-content.js";
+import { getSidebar } from "./sidebar.js";
 import { makeElement } from "./element-creator.js";
 
 function renderPage() {
@@ -10,4 +10,4 @@ function renderPage() {
     document.body.append(container);
 };
 
-export { renderPage, cache, refreshTodoList, refreshProjectList, refreshProjectsControl };
+renderPage();

@@ -21,6 +21,10 @@ function getAction(element) {
     );
 };
 
+function getRegistration(action) {
+    return actions.find(registration => registration.start === action);
+}
+
 function unregisterAction(element) {
     if (typeof element !== 'object') throw new TypeError('Element must be an object.');
     if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
@@ -28,7 +32,24 @@ function unregisterAction(element) {
 
     const action = getAction(element);
     const actionIndex = actions.indexOf(action);
-    actions.splice(actionIndex,1);
+    actions.splice(actionIndex, 1);
+};
+
+function addElementToRegistration(action, element) {
+    if (typeof action !== 'function') throw new TypeError('Action must be a function.');
+    if (typeof element !== 'object') throw new TypeError('Element must be an object.');
+    if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
+    if (getRegistration(action) === undefined) throw new Error('Action is not registered.');
+
+    const registration = getRegistration(action);
+    registration.validElements.push(element);
+};
+
+function removeElementFromRegistration(action, element) {
+    if (typeof action !== 'function') throw new TypeError('Action must be a function.');
+    if (typeof element !== 'object') throw new TypeError('Element must be an object.');
+    if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
+    if (getRegistration(action) === undefined) throw new Error('Action is not registered.');
 };
 
 

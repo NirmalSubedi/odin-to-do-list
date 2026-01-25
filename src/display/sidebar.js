@@ -1,6 +1,5 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
-import { cacheProjectsControlButtons, cacheNewProjectLi, cacheProjectNameButtons, cacheRemoveButtonsIcon } from "./cache.js";
 import removeIcon from "../images/remove.svg";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
@@ -33,7 +32,6 @@ function makeProjectsUl() {
             button.appendChild(span);
             li.appendChild(button);
 
-            cacheProjectNameButtons(button);
             return li;
         }
 
@@ -54,8 +52,6 @@ function makeProjectsUl() {
         button.append(span, img);
         li.appendChild(button);
 
-        cacheProjectNameButtons(button);
-        cacheRemoveButtonsIcon(img);
         return li;
     });
 
@@ -73,7 +69,6 @@ function makeProjectsUl() {
         });
 
         li.appendChild(input);
-        cacheNewProjectLi(li, input);
         return li;
     };
     lis.push(inputLi);
@@ -112,7 +107,6 @@ function makeProjectsControl() {
     addButton.append(addImg, addSpan),
         div.append(editButton, addButton);
 
-    cacheProjectsControlButtons(div);
     return div;
 };
 
@@ -122,17 +116,5 @@ function getSidebar() {
     return sidebar;
 };
 
-function refreshProjectList() {
-    sidebar.removeChild(ul);
-    ul = makeProjectsUl();
-    sidebar.insertBefore(ul, div);
-};
 
-function refreshProjectsControl(){
-    sidebar.removeChild(div);
-    div = makeProjectsControl();
-    sidebar.appendChild(div);
-    console.log('project controls')
-}
-
-export { getSidebar, refreshProjectList, refreshProjectsControl };
+export { getSidebar };
