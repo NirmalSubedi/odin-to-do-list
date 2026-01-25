@@ -26,6 +26,7 @@ const App = {
     },
 };
 
+App.getProject('Home').createTodo({title:'test'})
 App.createProject('About');
 App.createProject('Contact');
 

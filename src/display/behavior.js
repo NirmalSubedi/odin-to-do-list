@@ -44,13 +44,14 @@ const getCurrentProjectName = () => {
 };
 
 const removeProject = (element) => {
-    const span = element.previousElementSibling;
+    const removeImg = element;
+    const span = removeImg.previousElementSibling;
     const projectName = span.textContent;
     App.deleteProject(projectName);
 
-    unregisterAction(element);
+    unregisterAction(removeImg);
     refreshProjectList();
-    registerAction(removeProject, ...cache.sidebar.querySelectorAll('.project-name img'));
+    registerAction(removeProject, ...cache.sidebar.querySelectorAll('li .project-name img'));
     toggleProjectsEditButton();
 };
 
@@ -84,12 +85,17 @@ const showTodoDialog = () => {
 };
 
 const toggleTodoControlButtons = () => {
-    cache.todoControlButtons.forEach(([editButton, removeButton]) => {
-        editButton.classList.toggle('hide-button');
-        removeButton.classList.toggle('hide-button');
-    });
-    cache.editTodosButton.classList.toggle('showing');
+    toggleEachTodoControlButtons();
+    toggleTodosEditButton();
+};
 
+const toggleEachTodoControlButtons = () => {
+    const controlButtons = cache.projectTodosContainer.querySelectorAll('ul .todo-controls>*');
+    controlButtons.forEach(button=>button.classList.toggle('hide-button'));
+};
+
+const toggleTodosEditButton = () => {
+    cache.editTodosButton.classList.toggle('showing');
     if (cache.editTodosButton.classList.contains('showing')) {
         cache.editTodosButtonSpan.textContent = 'Cancel';
         cache.editTodosButtonIcon.setAttribute('src', closeIcon);
@@ -104,16 +110,17 @@ const toggleTodoControlButtons = () => {
         cache.addTodoButtonSpan.textContent = "Add Task";
         cache.addTodoButtonIcon.setAttribute('src', addIcon);
         cache.addTodoButtonIcon.setAttribute('alt', ' icon');
-    }
+    };
 };
 
 const saveTodoDetails = () => {
-    const titleValue = cache.todoDialogTitleInput.value;
+    // TODO: change logic to integrate delete checked
+    const titleValue = cache.todoDialogTitleInput.value.trim();
     if (titleValue === '') return 'Title is required!';
-    const descriptionValue = cache.todoDialogDescriptionInput.value;
+    const descriptionValue = cache.todoDialogDescriptionInput.value.trim();
     const dueDateValue = cache.todoDialogDueDateInput.value;
     const priorityValue = cache.todoDialogPriorityCheckbox.checked;
-    const notesValue = cache.todoDialogNotesTextarea.value;
+    const notesValue = cache.todoDialogNotesTextarea.value.trim();
 
     const currentProjectName = getCurrentProjectName();
     const currentProject = App.getProject(currentProjectName);
@@ -125,10 +132,13 @@ const saveTodoDetails = () => {
         notes: notesValue,
     });
 
+    refreshTodoList();
+    clearTodoFields();
+};
+
+const refreshTodoList = () => {
     cache.projectTodosContainer.removeChild(cache.projectTodosContainer.querySelector('ul'));
     cache.projectTodosContainer.insertBefore(makeTodosUl(), cache.projectTodosContainer.lastElementChild);
-
-    clearTodoFields();
 };
 
 const clearTodoFields = () => {
@@ -145,18 +155,8 @@ registerAction(removeProject, ...cache.sidebar.querySelectorAll('button.project-
 
 // main
 registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
-// registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
+registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
 registerAction(saveTodoDetails, cache.saveTodoDialogButton);
 
 
-export {
-    cache,
-    getAction,
-    showTodoDialog,
-    toggleTodoControlButtons,
-    saveTodoDetails,
-    toggleProjectsControlButtons,
-    showProjectInput,
-    processProjectInput,
-    removeProject,
-};
+export { cache, getAction, processProjectInput };
