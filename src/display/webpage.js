@@ -1,6 +1,5 @@
-import { getMain } from "./main-content.js";
+import { getMain, makeElement } from "./main-content.js";
 import { getSidebar } from "./sidebar.js";
-import { makeElement } from "./element-creator.js";
 
 function renderPage() {
     const container = makeElement({ classes: ['app'] });

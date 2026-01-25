@@ -257,4 +257,4 @@ function getMain() {
     return main;
 };
 
-export { getMain };
+export { getMain, makeElement, makeTodosUl };

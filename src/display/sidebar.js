@@ -5,14 +5,6 @@ import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
 
 const projects = App.projects;
-const currentProjectTodos = getProjectTodos();
-
-function getProjectTodos() {
-    const project = getCurrentProject();
-    return App.getProject(project);
-}
-function getCurrentProject() {
-}
 
 const sidebar = makeElement({ classes: ['sidebar'] });
 

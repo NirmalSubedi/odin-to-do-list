@@ -3,6 +3,8 @@ import "./webpage.js";
 const cache = {};
 
 // SideBar
+cache.projectList = document.querySelector('.sidebar .project-list');
+
 cache.projectInputListItem = document.querySelector('li.new-project');
 cache.projectInputTextbox = cache.projectInputListItem.querySelector('input[type=text]');
 
@@ -21,6 +23,8 @@ cache.addTodoButtonSpan = document.querySelector('.add-todo-button span');
 cache.editTodosButton = document.querySelector('.edit-todos-button');
 cache.editTodosButtonIcon = document.querySelector('.edit-todos-button img');
 cache.editTodosButtonSpan = document.querySelector('.edit-todos-button span');
+
+cache.projectTodosContainer = document.querySelector('.project-todos');
 
 cache.todoDialog = document.querySelector('.todo-dialog');
 cache.todoDialogForm = cache.todoDialog.querySelector('form.todo-form');

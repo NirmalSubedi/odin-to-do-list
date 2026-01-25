@@ -1,6 +1,7 @@
 import { App } from "../logic/app.js";
 import { cache } from "./cache.js";
 import { getAction, registerAction } from "./actions.js";
+import { makeTodosUl } from "./main-content.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
 import removeIcon from "../images/remove.svg";
@@ -25,12 +26,10 @@ const processProjectInput = () => {
 };
 
 const getCurrentProjectName = () => {
-    const button = cache.projectNameButtons.find(project => {
-        return project.parentElement.classList.contains('active-project');
-    });
-    const name = button.firstElementChild.textContent;
+    const listItem = cache.projectList.querySelector('.active-project');
+    const name = listItem.querySelector('span').textContent;
     return name;
-}
+};
 
 const removeProject = (element) => {
     const span = element.previousElementSibling;
@@ -88,14 +87,16 @@ const saveTodoDetails = () => {
         notes: notesValue,
     });
 
-    refreshTodoList();
+    cache.projectTodosContainer.removeChild(cache.projectTodosContainer.querySelector('ul'));
+    cache.projectTodosContainer.insertBefore(makeTodosUl(), cache.projectTodosContainer.lastElementChild);
+
     clearTodoFields();
-}
+};
 
 const clearTodoFields = () => {
     cache.saveTodoDialogButton.setAttribute('formnovalidate', true);
     cache.todoDialogForm.reset();
-}
+};
 
 const toggleProjectsControlButtons = () => {
     cache.projectNameButtons.forEach(
@@ -111,16 +112,9 @@ const toggleProjectsControlButtons = () => {
         cache.editProjectsButtonSpan.textContent = "Edit";
         cache.editProjectsButtonIcon.setAttribute('src', editIcon);
         cache.editProjectsButtonIcon.setAttribute('alt', 'edit icon');
-    }
-}
-
-
-const logTest = (element) => {
-    // const todoLabel = element.parentElement.parentElement.previousElementSibling;
-    // const todoNumber = todoLabel.getAttribute('for').at(-1); 
-    // cache.titleTextInput.value = todoNumber;
-    // cache.todoDialog.showModal();
+    };
 };
+
 
 // sidebar
 // registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
@@ -130,11 +124,10 @@ const logTest = (element) => {
 // main
 registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
 // registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
-// registerAction(saveTodoDetails, cache.saveTodoDialogButton);
+registerAction(saveTodoDetails, cache.saveTodoDialogButton);
 
 
 export {
-    App,
     cache,
     getAction,
     showTodoDialog,
@@ -144,5 +137,4 @@ export {
     showProjectInput,
     processProjectInput,
     removeProject,
-    logTest,
 };
