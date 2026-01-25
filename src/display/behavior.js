@@ -91,7 +91,7 @@ const toggleTodoControlButtons = () => {
 
 const toggleEachTodoControlButtons = () => {
     const controlButtons = cache.projectTodosContainer.querySelectorAll('ul .todo-controls>*');
-    controlButtons.forEach(button=>button.classList.toggle('hide-button'));
+    controlButtons.forEach(button => button.classList.toggle('hide-button'));
 };
 
 const toggleTodosEditButton = () => {
@@ -146,6 +146,23 @@ const clearTodoFields = () => {
     cache.todoDialogForm.reset();
 };
 
+const editTodoDetails = (element) => {
+    const editImg = element;
+    const label = element.parentElement.parentElement.previousElementSibling;
+    const span = label.firstElementChild.firstElementChild.lastElementChild;
+    const todoTitle = span.textContent;
+
+    const currentProjectName = getCurrentProjectName();
+    const storedTodo = App.getProject(currentProjectName).getTodo(todoTitle);
+
+    cache.todoDialogTitleInput.value = storedTodo.title;
+    if (storedTodo.description !== undefined) cache.todoDialogDescriptionInput.value = storedTodo.description;
+    cache.todoDialogDueDateInput.value = storedTodo.dueDate;
+    cache.todoDialogPriorityCheckbox.checked = storedTodo.priority;
+    if (storedTodo.notes !== undefined) cache.todoDialogNotesTextarea.value = storedTodo.notes;
+
+    showTodoDialog();
+};
 
 
 // sidebar
@@ -157,6 +174,7 @@ registerAction(removeProject, ...cache.sidebar.querySelectorAll('button.project-
 registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
 registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
 registerAction(saveTodoDetails, cache.saveTodoDialogButton);
+registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
 
 
 export { cache, getAction, processProjectInput };
