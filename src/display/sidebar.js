@@ -10,7 +10,7 @@ const sidebar = makeElement({ classes: ['sidebar'] });
 
 const h2 = makeElement({ tag: 'h2', text: 'Projects' });
 
-let ul = makeProjectsUl();
+const ul = makeProjectsUl();
 function makeProjectsUl() {
     const ul = makeElement({ tag: 'ul', classes: ['project-list'] });
 
@@ -70,7 +70,7 @@ function makeProjectsUl() {
 };
 
 
-let div = makeProjectsControl();
+const div = makeProjectsControl();
 function makeProjectsControl() {
     const div = makeElement({ classes: ['projects-control'] });
     const editButton = makeElement({ tag: 'button', classes: ['edit-projects-button'] });
@@ -109,4 +109,4 @@ function getSidebar() {
 };
 
 
-export { getSidebar };
+export { getSidebar, makeProjectsUl };

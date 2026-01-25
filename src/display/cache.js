@@ -3,7 +3,7 @@ import "./webpage.js";
 const cache = {};
 
 // SideBar
-cache.projectList = document.querySelector('.sidebar .project-list');
+cache.sidebar = document.querySelector('.sidebar');
 
 cache.projectInputListItem = document.querySelector('li.new-project');
 cache.projectInputTextbox = cache.projectInputListItem.querySelector('input[type=text]');
@@ -13,8 +13,8 @@ cache.editProjectsButtonIcon = cache.editProjectsButton.querySelector('img');
 cache.editProjectsButtonSpan = cache.editProjectsButton.querySelector('span');
 
 cache.addProjectButton = document.querySelector('button.add-project-button');
-cache.editProjectsButtonImg = cache.addProjectButton.querySelector('img');
-cache.editProjectsButtonSpan = cache.addProjectButton.querySelector('span');
+cache.addProjectButtonIcon = cache.addProjectButton.querySelector('img');
+cache.addProjectButtonSpan = cache.addProjectButton.querySelector('span');
 
 // Main
 cache.addTodoButton = document.querySelector('.add-todo-button');

@@ -2,6 +2,7 @@ import { App } from "../logic/app.js";
 import { cache } from "./cache.js";
 import { getAction, registerAction } from "./actions.js";
 import { makeTodosUl } from "./main-content.js";
+import { makeProjectsUl } from "./sidebar.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
 import removeIcon from "../images/remove.svg";
@@ -20,13 +21,16 @@ const processProjectInput = () => {
     if (inputValue === "") return;
 
     App.createProject(inputValue);
-    refreshProjectList();
+    
+    cache.sidebar.removeChild(cache.sidebar.querySelector('ul'));
+    cache.sidebar.insertBefore(makeProjectsUl(), cache.sidebar.lastElementChild);
 
-    addElementToRegistration(toggleProjectsControlButtons,);
+    cache.projectInputListItem = cache.sidebar.querySelector('li.new-project');
+    cache.projectInputTextbox = cache.projectInputListItem.querySelector('input[type=text]');
 };
 
 const getCurrentProjectName = () => {
-    const listItem = cache.projectList.querySelector('.active-project');
+    const listItem = cache.sidebar.querySelector('.active-project');
     const name = listItem.querySelector('span').textContent;
     return name;
 };
@@ -118,7 +122,7 @@ const toggleProjectsControlButtons = () => {
 
 // sidebar
 // registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
-// registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
+registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
 // registerAction(removeProject, ...cache.removeProjectButtonsIcon);
 
 // main
