@@ -10,6 +10,10 @@ class DOM {
         document.addEventListener('change', DOM.#handleChange);
     };
 
+    static attachCancelListener(){
+        cache.todoDialog.addEventListener('cancel', DOM.#handleCancel);
+    };
+
     static #handleClick(event) {
         cache.projectInputListItem.classList.add('hide-input');
         const element = event.target;
@@ -24,9 +28,13 @@ class DOM {
         behavior.processProjectInput();
     };
 
+    static #handleCancel(event){
+        behavior.clearTodoFields();
+    };
 };
 
 
 DOM.attachClickListener();
 DOM.attachChangeListener();
+DOM.attachCancelListener();
 export { DOM };

@@ -164,7 +164,6 @@ const editTodoDetails = (element) => {
     showTodoDialog();
 };
 
-
 // sidebar
 registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
 registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
@@ -175,6 +174,6 @@ registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cac
 registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
 registerAction(saveTodoDetails, cache.saveTodoDialogButton);
 registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
+registerAction(clearTodoFields, cache.todoDialogCloseButton, cache.todoDialogCloseButton.querySelector('img'));
 
-
-export { cache, getAction, processProjectInput };
+export { cache, getAction, processProjectInput, clearTodoFields };
