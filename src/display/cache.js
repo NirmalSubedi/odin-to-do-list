@@ -28,13 +28,14 @@ cache.projectTodosContainer = document.querySelector('.project-todos');
 
 cache.todoDialog = document.querySelector('.todo-dialog');
 cache.todoDialogForm = cache.todoDialog.querySelector('form.todo-form');
-cache.todoDialogCloseButton = cache.todoDialog.querySelector('button[class=close-button]')
+cache.todoDialogCloseButton = cache.todoDialog.querySelector('button[class=close-button]');
+cache.todoDialogCloseImg = cache.todoDialogCloseButton.querySelector('img');
 cache.todoDialogTitleInput = cache.todoDialog.querySelector('input[name=title]');
 cache.todoDialogDescriptionInput = cache.todoDialog.querySelector('input[name=description]');
 cache.todoDialogDueDateInput = cache.todoDialog.querySelector('input[name=due-date]');
 cache.todoDialogPriorityCheckbox = cache.todoDialog.querySelector('input[name=priority]');
 cache.todoDialogNotesTextarea = cache.todoDialog.querySelector('textarea[name=notes]');
-cache.saveTodoDialogButton = cache.todoDialog.querySelector('button[type=submit]');
+cache.todoDialogSaveButton = cache.todoDialog.querySelector('button[type=submit]');
 
 
 

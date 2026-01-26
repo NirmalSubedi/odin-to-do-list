@@ -80,13 +80,14 @@ const toggleProjectsEditButton = () => {
 
 // Main
 const showTodoDialog = () => {
-    cache.saveTodoDialogButton.removeAttribute('formnovalidate');
+    // TODO: change logic to integrate delete checked
+    cache.todoDialogSaveButton.removeAttribute('formnovalidate');
     cache.todoDialog.showModal();
 };
 
-const toggleTodoControlButtons = () => {
+const toggleAllTodoButtons = () => {
     toggleEachTodoControlButtons();
-    toggleTodosEditButton();
+    toggleTodosControlButtons();
 };
 
 const toggleEachTodoControlButtons = () => {
@@ -94,7 +95,7 @@ const toggleEachTodoControlButtons = () => {
     controlButtons.forEach(button => button.classList.toggle('hide-button'));
 };
 
-const toggleTodosEditButton = () => {
+const toggleTodosControlButtons = () => {
     cache.editTodosButton.classList.toggle('showing');
     if (cache.editTodosButton.classList.contains('showing')) {
         cache.editTodosButtonSpan.textContent = 'Cancel';
@@ -114,9 +115,8 @@ const toggleTodosEditButton = () => {
 };
 
 const saveTodoDetails = () => {
-    // TODO: change logic to integrate delete checked
     const titleValue = cache.todoDialogTitleInput.value.trim();
-    if (titleValue === '') return 'Title is required!';
+    if (titleValue === '') return console.warn('Title is required!');
     const descriptionValue = cache.todoDialogDescriptionInput.value.trim();
     const dueDateValue = cache.todoDialogDueDateInput.value;
     const priorityValue = cache.todoDialogPriorityCheckbox.checked;
@@ -124,7 +124,8 @@ const saveTodoDetails = () => {
 
     const currentProjectName = getCurrentProjectName();
     const currentProject = App.getProject(currentProjectName);
-    const todo = currentProject.getTodo(titleValue);
+    const openingTodoTitle = currentProject.openedTodoTitle;
+    const todo = currentProject.getTodo(openingTodoTitle);
 
     if (todo === undefined) {
         currentProject.createTodo({
@@ -142,8 +143,11 @@ const saveTodoDetails = () => {
         todo.notes = notesValue;
     };
 
+    unregisterAction(cache.projectTodosContainer.querySelector('ul .edit-todo-button img'))
     refreshTodoList();
+    registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
     clearTodoFields();
+    toggleTodosControlButtons();
 };
 
 const refreshTodoList = () => {
@@ -152,18 +156,19 @@ const refreshTodoList = () => {
 };
 
 const clearTodoFields = () => {
-    cache.saveTodoDialogButton.setAttribute('formnovalidate', true);
+    cache.todoDialogSaveButton.setAttribute('formnovalidate', true);
     cache.todoDialogForm.reset();
 };
 
 const editTodoDetails = (element) => {
     const editImg = element;
-    const label = element.parentElement.parentElement.previousElementSibling;
+    const label = editImg.parentElement.parentElement.previousElementSibling;
     const span = label.firstElementChild.firstElementChild.lastElementChild;
     const todoTitle = span.textContent;
 
     const currentProjectName = getCurrentProjectName();
     const storedTodo = App.getProject(currentProjectName).getTodo(todoTitle);
+    App.getProject(currentProjectName).openedTodoTitle = storedTodo.title;
 
     cache.todoDialogTitleInput.value = storedTodo.title;
     if (storedTodo.description !== undefined) cache.todoDialogDescriptionInput.value = storedTodo.description;
@@ -181,9 +186,9 @@ registerAction(removeProject, ...cache.sidebar.querySelectorAll('button.project-
 
 // main
 registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
-registerAction(toggleTodoControlButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
-registerAction(saveTodoDetails, cache.saveTodoDialogButton);
+registerAction(toggleAllTodoButtons, cache.editTodosButton, cache.editTodosButtonIcon, cache.editTodosButtonSpan);
+registerAction(saveTodoDetails, cache.todoDialogSaveButton);
 registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
-registerAction(clearTodoFields, cache.todoDialogCloseButton, cache.todoDialogCloseButton.querySelector('img'));
+registerAction(clearTodoFields, cache.todoDialogCloseButton, cache.todoDialogCloseImg);
 
 export { cache, getAction, processProjectInput, clearTodoFields };
