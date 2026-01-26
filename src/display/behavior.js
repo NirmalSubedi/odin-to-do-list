@@ -124,13 +124,23 @@ const saveTodoDetails = () => {
 
     const currentProjectName = getCurrentProjectName();
     const currentProject = App.getProject(currentProjectName);
-    currentProject.createTodo({
-        title: titleValue,
-        description: descriptionValue,
-        dueDate: dueDateValue,
-        priority: priorityValue,
-        notes: notesValue,
-    });
+    const todo = currentProject.getTodo(titleValue);
+
+    if (todo === undefined) {
+        currentProject.createTodo({
+            title: titleValue,
+            description: descriptionValue,
+            dueDate: dueDateValue,
+            priority: priorityValue,
+            notes: notesValue,
+        });
+    } else {
+        todo.title = titleValue;
+        todo.description = descriptionValue;
+        todo.dueDate = dueDateValue;
+        todo.priority = priorityValue;
+        todo.notes = notesValue;
+    };
 
     refreshTodoList();
     clearTodoFields();
