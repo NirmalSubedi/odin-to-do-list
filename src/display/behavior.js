@@ -150,7 +150,7 @@ const saveTodoDetails = () => {
     refreshTodoList();
     registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
     clearTodoFields();
-    toggleTodosControlButtons();
+    if(todo!==undefined) toggleTodosControlButtons();
 };
 
 const refreshTodoList = () => {
