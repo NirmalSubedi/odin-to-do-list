@@ -17,6 +17,7 @@ cache.addProjectButtonIcon = cache.addProjectButton.querySelector('img');
 cache.addProjectButtonSpan = cache.addProjectButton.querySelector('span');
 
 // Main
+cache.buttonsContainer = document.querySelector('.project-controls');
 cache.addTodoButton = document.querySelector('.add-todo-button');
 cache.addTodoButtonIcon = document.querySelector('.add-todo-button img');
 cache.addTodoButtonSpan = document.querySelector('.add-todo-button span');

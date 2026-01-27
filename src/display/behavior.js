@@ -1,7 +1,7 @@
 import { App } from "../logic/app.js";
 import { cache } from "./cache.js";
 import { getAction, registerAction, unregisterAction, getRegistration } from "./actions.js";
-import { makeTodosUl } from "./main-content.js";
+import { makeTodosUl, makeElement } from "./main-content.js";
 import { makeProjectsUl } from "./sidebar.js";
 import editIcon from "../images/edit.svg";
 import closeIcon from "../images/close.svg";
@@ -104,17 +104,51 @@ const toggleTodosControlButtons = () => {
         cache.editTodosButtonSpan.textContent = 'Cancel';
         cache.editTodosButtonIcon.setAttribute('src', closeIcon);
         cache.editTodosButtonIcon.setAttribute('alt', 'close icon');
-        cache.addTodoButtonSpan.textContent = "Delete Checked";
-        cache.addTodoButtonIcon.setAttribute('src', removeIcon);
-        cache.addTodoButtonIcon.setAttribute('alt', 'remove icon');
+        replaceAddTodoButton();
     } else {
         cache.editTodosButtonSpan.textContent = 'Edit Tasks';
         cache.editTodosButtonIcon.setAttribute('src', editIcon);
         cache.editTodosButtonIcon.setAttribute('alt', 'edit icon');
-        cache.addTodoButtonSpan.textContent = "Add Task";
-        cache.addTodoButtonIcon.setAttribute('src', addIcon);
-        cache.addTodoButtonIcon.setAttribute('alt', ' icon');
+        replaceDeleteCheckedButton();
     };
+};
+
+const replaceAddTodoButton = () => {
+    const addTodoButton = cache.buttonsContainer.lastElementChild;
+    cache.buttonsContainer.removeChild(addTodoButton);
+
+    const deleteCompleteButton = makeElement({ tag: 'button', classes: ['remove-checked-todos'] });
+    const deleteCompleteRemoveIcon = makeElement({
+        tag: 'img',
+        attributes: {
+            src: removeIcon,
+            alt: 'remove icon',
+            width: '20',
+            height: '20',
+        },
+    });
+    const deleteCompleteSpan = makeElement({ tag: 'span', text: 'Delete Checked' });
+    deleteCompleteButton.append(deleteCompleteRemoveIcon, deleteCompleteSpan);
+    cache.buttonsContainer.appendChild(deleteCompleteButton);
+};
+
+const replaceDeleteCheckedButton = () => {
+    const deleteCheckedButton = cache.buttonsContainer.lastElementChild;
+    cache.buttonsContainer.removeChild(deleteCheckedButton);
+
+    const addTodoButton = makeElement({ tag: 'button', classes: ['add-todo-button'] });
+    const addTodoButtonIcon = makeElement({
+        tag: 'img',
+        attributes: {
+            src: addIcon,
+            alt: 'add icon',
+            width: '20',
+            height: '20',
+        },
+    });
+    const addTodoButtonSpan = makeElement({ tag: 'span', text: 'Add Todo' });
+    addTodoButton.append(addTodoButtonIcon, addTodoButtonSpan);
+    cache.buttonsContainer.appendChild(addTodoButton);
 };
 
 const saveTodoDetails = () => {
@@ -201,6 +235,10 @@ const refreshTodoListRegistration = () => {
     refreshTodoList();
     registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
     registerAction(deleteTodo, ...cache.projectTodosContainer.querySelectorAll('ul .remove-todo-button img'));
+};
+
+const deleteCompletedTodos = (element) => {
+    console.log(element)
 };
 
 // sidebar
