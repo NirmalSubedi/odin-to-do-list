@@ -104,18 +104,19 @@ const toggleTodosControlButtons = () => {
         cache.editTodosButtonSpan.textContent = 'Cancel';
         cache.editTodosButtonIcon.setAttribute('src', closeIcon);
         cache.editTodosButtonIcon.setAttribute('alt', 'close icon');
-        replaceAddTodoButton();
+        attachDeleteCompleteButton();
     } else {
         cache.editTodosButtonSpan.textContent = 'Edit Tasks';
         cache.editTodosButtonIcon.setAttribute('src', editIcon);
         cache.editTodosButtonIcon.setAttribute('alt', 'edit icon');
-        replaceDeleteCheckedButton();
+        attachAddTodoButton();
     };
 };
 
-const replaceAddTodoButton = () => {
+const attachDeleteCompleteButton = () => {
     const addTodoButton = cache.buttonsContainer.lastElementChild;
     cache.buttonsContainer.removeChild(addTodoButton);
+    unregisterAction(addTodoButton);
 
     const deleteCompleteButton = makeElement({ tag: 'button', classes: ['remove-checked-todos'] });
     const deleteCompleteRemoveIcon = makeElement({
@@ -130,11 +131,13 @@ const replaceAddTodoButton = () => {
     const deleteCompleteSpan = makeElement({ tag: 'span', text: 'Delete Checked' });
     deleteCompleteButton.append(deleteCompleteRemoveIcon, deleteCompleteSpan);
     cache.buttonsContainer.appendChild(deleteCompleteButton);
+    registerAction(deleteCompletedTodos, deleteCompleteButton, deleteCompleteRemoveIcon, deleteCompleteSpan);
 };
 
-const replaceDeleteCheckedButton = () => {
+const attachAddTodoButton = () => {
     const deleteCheckedButton = cache.buttonsContainer.lastElementChild;
     cache.buttonsContainer.removeChild(deleteCheckedButton);
+    unregisterAction(deleteCheckedButton);
 
     const addTodoButton = makeElement({ tag: 'button', classes: ['add-todo-button'] });
     const addTodoButtonIcon = makeElement({
@@ -149,6 +152,7 @@ const replaceDeleteCheckedButton = () => {
     const addTodoButtonSpan = makeElement({ tag: 'span', text: 'Add Todo' });
     addTodoButton.append(addTodoButtonIcon, addTodoButtonSpan);
     cache.buttonsContainer.appendChild(addTodoButton);
+    registerAction(showTodoDialog, addTodoButton, addTodoButtonIcon, addTodoButtonSpan);
 };
 
 const saveTodoDetails = () => {
@@ -237,8 +241,17 @@ const refreshTodoListRegistration = () => {
     registerAction(deleteTodo, ...cache.projectTodosContainer.querySelectorAll('ul .remove-todo-button img'));
 };
 
-const deleteCompletedTodos = (element) => {
-    console.log(element)
+const deleteCompletedTodos = () => {
+    const checkboxes = cache.projectTodosContainer.querySelectorAll('ul input[type=checkbox]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked === false) return;
+        const todoTitle = checkbox.nextElementSibling.textContent;
+        const currentProjectName = getCurrentProjectName();
+        App.getProject(currentProjectName).deleteTodo(todoTitle);
+    });
+
+    refreshTodoListRegistration();
+    toggleTodosControlButtons();
 };
 
 // sidebar
