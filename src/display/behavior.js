@@ -83,6 +83,9 @@ const showTodoDialog = () => {
     // TODO: change logic to integrate delete checked
     cache.todoDialogSaveButton.removeAttribute('formnovalidate');
     cache.todoDialog.showModal();
+
+    const currentProjectName = getCurrentProjectName();
+    App.getProject(currentProjectName).openedTodoTitle = null;
 };
 
 const toggleAllTodoButtons = () => {
@@ -161,10 +164,7 @@ const clearTodoFields = () => {
 };
 
 const editTodoDetails = (element) => {
-    const editImg = element;
-    const label = editImg.parentElement.parentElement.previousElementSibling;
-    const span = label.firstElementChild.firstElementChild.lastElementChild;
-    const todoTitle = span.textContent;
+    const todoTitle = getTodoTitle(element);
 
     const currentProjectName = getCurrentProjectName();
     const storedTodo = App.getProject(currentProjectName).getTodo(todoTitle);
@@ -179,6 +179,18 @@ const editTodoDetails = (element) => {
     showTodoDialog();
 };
 
+// const deleteTodo = (element) => {
+//     const todoTitle = getTodoTitle(element);
+//     console.log(todoTitle)
+// };
+
+// const getTodoTitle = (imgElement) => {
+//     const removeImg = imgElement;
+//     const label = removeImg.parentElement.parentElement.previousElementSibling;
+//     const span = label.firstElementChild.firstElementChild.lastElementChild;
+//     return span.textContent;
+// };
+
 // sidebar
 registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
 registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
@@ -190,5 +202,6 @@ registerAction(toggleAllTodoButtons, cache.editTodosButton, cache.editTodosButto
 registerAction(saveTodoDetails, cache.todoDialogSaveButton);
 registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
 registerAction(clearTodoFields, cache.todoDialogCloseButton, cache.todoDialogCloseImg);
+registerAction(deleteTodo, ...cache.projectTodosContainer.querySelectorAll('ul .remove-todo-button img'));
 
 export { cache, getAction, processProjectInput, clearTodoFields };
