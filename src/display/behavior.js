@@ -104,7 +104,7 @@ const toggleTodosControlButtons = () => {
         cache.editTodosButtonSpan.textContent = 'Cancel';
         cache.editTodosButtonIcon.setAttribute('src', closeIcon);
         cache.editTodosButtonIcon.setAttribute('alt', 'close icon');
-        cache.addTodoButtonSpan.textContent = "Delete Tasks";
+        cache.addTodoButtonSpan.textContent = "Delete Checked";
         cache.addTodoButtonIcon.setAttribute('src', removeIcon);
         cache.addTodoButtonIcon.setAttribute('alt', 'remove icon');
     } else {
@@ -146,11 +146,9 @@ const saveTodoDetails = () => {
         todo.notes = notesValue;
     };
 
-    unregisterAction(cache.projectTodosContainer.querySelector('ul .edit-todo-button img'))
-    refreshTodoList();
-    registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
+    refreshTodoListRegistration();
     clearTodoFields();
-    if(todo!==undefined) toggleTodosControlButtons();
+    if (todo !== undefined) toggleTodosControlButtons();
 };
 
 const refreshTodoList = () => {
@@ -182,7 +180,12 @@ const editTodoDetails = (element) => {
 
 const deleteTodo = (element) => {
     const todoTitle = getTodoTitle(element);
-    console.log(todoTitle)
+
+    const currentProjectName = getCurrentProjectName();
+    App.getProject(currentProjectName).deleteTodo(todoTitle);
+
+    refreshTodoListRegistration();
+    toggleTodosControlButtons();
 };
 
 const getTodoTitle = (imgElement) => {
@@ -190,6 +193,14 @@ const getTodoTitle = (imgElement) => {
     const label = removeImg.parentElement.parentElement.previousElementSibling;
     const span = label.firstElementChild.firstElementChild.lastElementChild;
     return span.textContent;
+};
+
+const refreshTodoListRegistration = () => {
+    unregisterAction(cache.projectTodosContainer.querySelector('ul .remove-todo-button img'));
+    unregisterAction(cache.projectTodosContainer.querySelector('ul .edit-todo-button img'));
+    refreshTodoList();
+    registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
+    registerAction(deleteTodo, ...cache.projectTodosContainer.querySelectorAll('ul .remove-todo-button img'));
 };
 
 // sidebar
