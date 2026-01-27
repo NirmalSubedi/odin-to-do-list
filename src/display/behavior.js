@@ -176,20 +176,21 @@ const editTodoDetails = (element) => {
     cache.todoDialogPriorityCheckbox.checked = storedTodo.priority;
     if (storedTodo.notes !== undefined) cache.todoDialogNotesTextarea.value = storedTodo.notes;
 
-    showTodoDialog();
+    cache.todoDialogSaveButton.removeAttribute('formnovalidate');
+    cache.todoDialog.showModal();
 };
 
-// const deleteTodo = (element) => {
-//     const todoTitle = getTodoTitle(element);
-//     console.log(todoTitle)
-// };
+const deleteTodo = (element) => {
+    const todoTitle = getTodoTitle(element);
+    console.log(todoTitle)
+};
 
-// const getTodoTitle = (imgElement) => {
-//     const removeImg = imgElement;
-//     const label = removeImg.parentElement.parentElement.previousElementSibling;
-//     const span = label.firstElementChild.firstElementChild.lastElementChild;
-//     return span.textContent;
-// };
+const getTodoTitle = (imgElement) => {
+    const removeImg = imgElement;
+    const label = removeImg.parentElement.parentElement.previousElementSibling;
+    const span = label.firstElementChild.firstElementChild.lastElementChild;
+    return span.textContent;
+};
 
 // sidebar
 registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
