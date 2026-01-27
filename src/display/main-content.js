@@ -70,8 +70,18 @@ function makeTodosUl() {
             }
         });
         const span = makeElement({ tag: 'span', classes: ['todo-title-text'], text: `${todo.title}` });
-        const priorityTag = makeElement({ tag: 'p', text: 'Priority', classes: ['todo-priority-tag'] });
-        const dueDate = makeElement({ tag: 'p', text: `${todo.dueDate}`, classes: ['todo-due-date'] });
+        let priorityTag;
+        if (todo.priority === undefined) {
+            priorityTag = makeElement({ tag: 'p', text: 'Priority', classes: ['todo-priority-tag', 'hide-tag'] });
+        } else {
+            priorityTag = makeElement({ tag: 'p', text: 'Priority', classes: ['todo-priority-tag'] });
+        };
+        let dueDate;
+        if (todo.dueDate === undefined) {
+            dueDate = makeElement({ tag: 'p', text: ``, classes: ['todo-due-date', 'hide-tag'] });
+        } else {
+            dueDate = makeElement({ tag: 'p', text: `${todo.dueDate}`, classes: ['todo-due-date'] });
+        }
         const controls = makeElement({ classes: ['todo-controls'] });
         const editButton = makeElement({ tag: 'button', classes: ['edit-todo-button', 'hide-button'] });
         const removeButton = makeElement({ tag: 'button', classes: ['remove-todo-button', 'hide-button'] });
