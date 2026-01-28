@@ -25,10 +25,12 @@ const App = {
         return index !== -1;
     },
 };
+App.createProject('About');
+App.createProject('Contact');
 
 App.getProject('Home').createTodo({title:'test'})
 App.getProject('Home').createTodo({title:'test2', description:'this is a test', priority: true, notes: 'testing notes', dueDate:'2026-01-28T14:15'})
-App.createProject('About');
-App.createProject('Contact');
+
+App.openedProjectName = App.projects[0].name;
 
 export { App };

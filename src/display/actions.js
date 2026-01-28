@@ -26,6 +26,7 @@ function getRegistration(action) {
 }
 
 function unregisterAction(element) {
+    if(element === null) return;
     if (typeof element !== 'object') throw new TypeError('Element must be an object.');
     if (!(element instanceof HTMLElement)) throw new Error('Element must be an instance of HTMLElement.');
     if (getAction(element) === undefined) throw new Error('Element is not registered.');

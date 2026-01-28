@@ -17,9 +17,11 @@ function makeProjectsUl() {
     const DEFAULT_PROJECT_INDEX = 0;
     const lis = projects.map((project, index) => {
         if (index === DEFAULT_PROJECT_INDEX) {
-            const li = makeElement({ tag: 'li', classes: ['project-list-item', 'default', 'active-project'] });
+            const li = makeElement({ tag: 'li', classes: ['project-list-item', 'default'] });
             const button = makeElement({ tag: 'button', classes: ['project-name'] });
             const span = makeElement({ tag: 'span', text: `${project.name}` });
+
+            if (span.textContent === App.openedProjectName) li.classList.add('active-project');
 
             button.appendChild(span);
             li.appendChild(button);
@@ -40,6 +42,8 @@ function makeProjectsUl() {
                 tabindex: '0',
             }
         });
+
+        if (span.textContent === App.openedProjectName) li.classList.add('active-project');
 
         button.append(span, img);
         li.appendChild(button);

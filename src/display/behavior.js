@@ -78,9 +78,26 @@ const toggleProjectsEditButton = () => {
     };
 };
 
+const switchProjectPage = (element) => {
+    if (element.tagName === "BUTTON") element = element.firstElementChild;
+    const projectName = element.textContent;
+    // store name
+    App.openedProjectName = projectName;
+    // render project 
+    cache.projectTodosContainer
+        .querySelector('h1')
+        .textContent = projectName;
+
+    const projectLis = cache.sidebar.querySelectorAll('.project-list-item');
+    projectLis.forEach(li=>li.classList.remove('active-project'));
+    
+    const selectedProjectLi = element.parentElement.parentElement;
+    selectedProjectLi.classList.add('active-project');
+    refreshTodoListRegistration();
+};
+
 // Main
 const showTodoDialog = () => {
-    // TODO: change logic to integrate delete checked
     cache.todoDialogSaveButton.removeAttribute('formnovalidate');
     cache.todoDialog.showModal();
 
@@ -258,6 +275,7 @@ const deleteCompletedTodos = () => {
 registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
 registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
 registerAction(removeProject, ...cache.sidebar.querySelectorAll('button.project-name img'));
+registerAction(switchProjectPage, ...cache.sidebar.querySelectorAll('.project-list button.project-name'), ...cache.sidebar.querySelectorAll('.project-list .project-name span'));
 
 // main
 registerAction(showTodoDialog, cache.addTodoButton, cache.addTodoButtonIcon, cache.addTodoButtonSpan);
