@@ -81,16 +81,14 @@ const toggleProjectsEditButton = () => {
 const switchProjectPage = (element) => {
     if (element.tagName === "BUTTON") element = element.firstElementChild;
     const projectName = element.textContent;
-    // store name
     App.openedProjectName = projectName;
-    // render project 
     cache.projectTodosContainer
         .querySelector('h1')
         .textContent = projectName;
 
     const projectLis = cache.sidebar.querySelectorAll('.project-list-item');
-    projectLis.forEach(li=>li.classList.remove('active-project'));
-    
+    projectLis.forEach(li => li.classList.remove('active-project'));
+
     const selectedProjectLi = element.parentElement.parentElement;
     selectedProjectLi.classList.add('active-project');
     refreshTodoListRegistration();
