@@ -1,5 +1,6 @@
 import { makeElement } from "./element-creator.js";
 import { App } from "../logic/app.js";
+import { parseISO, formatDistanceToNowStrict } from "date-fns";
 import editIcon from "../images/edit.svg";
 import addIcon from "../images/add.svg";
 import removeIcon from "../images/remove.svg";
@@ -78,7 +79,13 @@ function makeTodosUl() {
         if (todo.dueDate === undefined) {
             dueDate = makeElement({ tag: 'p', text: ``, classes: ['todo-due-date', 'hide-tag'] });
         } else {
-            dueDate = makeElement({ tag: 'p', text: `${todo.dueDate}`, classes: ['todo-due-date'] });
+            const displayDate = formatDistanceToNowStrict(parseISO(todo.dueDate), {addSuffix:true});
+            dueDate = makeElement({
+                tag: 'p',
+                text: `${displayDate}`,
+                classes: ['todo-due-date']
+            });
+            if(displayDate.includes('ago')) dueDate.classList.add('overdue');
         }
         const controls = makeElement({ classes: ['todo-controls'] });
         const editButton = makeElement({ tag: 'button', classes: ['edit-todo-button', 'hide-button'] });

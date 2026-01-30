@@ -5,6 +5,7 @@
   --clr-primary-600: hsl(123, 68%, 48%, 0.6);
   --clr-secondary: hsl(27, 79%, 74%);
   --clr-accent: hsl(97, 76%, 61%);
+  --clr-warn: hsl(0, 100%, 50%);
   --clr-text: hsl(243, 76%, 5%);
   --clr-bg: hsl(240, 60%, 99%);
 
@@ -343,6 +344,14 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
   font-size: var(--fs-small);
 }
 
+.overdue {
+  color: var(--clr-warn);
+}
+
+label:has(input[type="checkbox"]:checked) .todo-due-date {
+  color: var(--clr-light-400);
+}
+
 .todo-controls {
   align-self: flex-start;
   display: flex;
@@ -400,7 +409,7 @@ label:has(input[type="checkbox"]:checked) .todo-priority-tag {
 }
 
 .todo-form span.required {
-  color: #e00;
+  color: var(--clr-warn);
   font-weight: initial;
 }
 
