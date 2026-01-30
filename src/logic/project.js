@@ -8,7 +8,7 @@ class Project {
     };
 
     createTodo(todo) {
-        if(this.isDuplicateTodo(todo)) throw new Error("Same title todo already exists!");
+        if(this.isDuplicateTodo(todo)) return alert("Same title Task already exists!");
         
         this.todos.push(new ToDo(todo));
     };

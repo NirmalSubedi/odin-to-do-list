@@ -6,7 +6,7 @@ const App = {
     ],
 
     createProject(name) {
-        if(this.isDuplicateProject(name)) throw new Error("Same name Project already exists!");
+        if(this.isDuplicateProject(name)) return alert("Same name Project already exists!");
         
         this.projects.push(new Project(`${name}`));
     },
