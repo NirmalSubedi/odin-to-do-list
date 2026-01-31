@@ -1,4 +1,5 @@
 import { Project } from "./project.js";
+import { getStored, populateStorage } from "./storage.js";
 
 const App = {
     projects: [
@@ -25,6 +26,7 @@ const App = {
         return index !== -1;
     },
 };
+
 App.createProject('About');
 App.createProject('Contact');
 
