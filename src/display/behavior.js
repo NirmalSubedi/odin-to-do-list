@@ -1,4 +1,4 @@
-import { App } from "../logic/app.js";
+import { App, populateStorage } from "../logic/app.js";
 import { cache } from "./cache.js";
 import { getAction, registerAction, unregisterAction, getRegistration } from "./actions.js";
 import { makeTodosUl, makeElement } from "./main-content.js";
@@ -22,8 +22,10 @@ const processProjectInput = () => {
     if (inputValue.trim() === "") return;
 
     App.createProject(inputValue);
+    populateStorage(App);
 
     const previousLiRemoveIcon = inputLi.previousElementSibling.firstElementChild.lastElementChild;
+    console.log(previousLiRemoveIcon);
     if (getRegistration(removeProject) !== undefined) unregisterAction(previousLiRemoveIcon);
     refreshProjectList();
     registerAction(removeProject, ...cache.sidebar.querySelectorAll('.project-name img'));
@@ -48,6 +50,7 @@ const removeProject = (element) => {
     const span = removeImg.previousElementSibling;
     const projectName = span.textContent;
     App.deleteProject(projectName);
+    populateStorage(App);
 
     unregisterAction(removeImg);
     refreshProjectList();
@@ -82,6 +85,7 @@ const switchProjectPage = (element) => {
     if (element.tagName === "BUTTON") element = element.firstElementChild;
     const projectName = element.textContent;
     App.openedProjectName = projectName;
+    populateStorage(App);
     cache.projectTodosContainer
         .querySelector('h1')
         .textContent = projectName;
@@ -101,6 +105,7 @@ const showTodoDialog = () => {
 
     const currentProjectName = getCurrentProjectName();
     App.getProject(currentProjectName).openedTodoTitle = null;
+    populateStorage(App);
 };
 
 const toggleAllTodoButtons = () => {
@@ -198,6 +203,7 @@ const saveTodoDetails = () => {
         todo.priority = priorityValue;
         todo.notes = notesValue;
     };
+    populateStorage(App);
 
     refreshTodoListRegistration();
     clearTodoFields();
@@ -220,6 +226,7 @@ const editTodoDetails = (element) => {
     const currentProjectName = getCurrentProjectName();
     const storedTodo = App.getProject(currentProjectName).getTodo(todoTitle);
     App.getProject(currentProjectName).openedTodoTitle = storedTodo.title;
+    populateStorage(App);
 
     cache.todoDialogTitleInput.value = storedTodo.title;
     if (storedTodo.description !== undefined) cache.todoDialogDescriptionInput.value = storedTodo.description;
@@ -236,6 +243,7 @@ const deleteTodo = (element) => {
 
     const currentProjectName = getCurrentProjectName();
     App.getProject(currentProjectName).deleteTodo(todoTitle);
+    populateStorage(App);
 
     refreshTodoListRegistration();
     toggleTodosControlButtons();
@@ -263,6 +271,7 @@ const deleteCompletedTodos = () => {
         const todoTitle = checkbox.nextElementSibling.textContent;
         const currentProjectName = getCurrentProjectName();
         App.getProject(currentProjectName).deleteTodo(todoTitle);
+        populateStorage(App);
     });
 
     refreshTodoListRegistration();

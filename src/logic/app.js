@@ -2,13 +2,11 @@ import { Project } from "./project.js";
 import { getStored, populateStorage } from "./storage.js";
 
 const App = {
-    projects: [
-        new Project('Home'),
-    ],
+    projects: [],
 
     createProject(name) {
-        if(this.isDuplicateProject(name)) return alert("Same name Project already exists!");
-        
+        if (this.isDuplicateProject(name)) return alert("Same name Project already exists!");
+
         this.projects.push(new Project(`${name}`));
     },
 
@@ -21,18 +19,33 @@ const App = {
         return this.projects.find(project => targetProject === project.name);
     },
 
-    isDuplicateProject(targetName){
-        const index = this.projects.findIndex(project=>project.name === targetName);
+    isDuplicateProject(targetName) {
+        const index = this.projects.findIndex(project => project.name === targetName);
         return index !== -1;
     },
 };
 
-App.createProject('About');
-App.createProject('Contact');
+const processLocalStorage = () => {
+    const storedApp = getStored();
+    if (storedApp === 'No storage Available' || storedApp === null) {
+        App.createProject('Home');
+        App.openedProjectName = App.projects[0].name;
+        return;
+    };
 
-App.getProject('Home').createTodo({title:'test'})
-App.getProject('Home').createTodo({title:'test2', description:'this is a test', priority: true, notes: 'testing notes', dueDate:'2026-01-28T14:15'})
+    const storedProjects = storedApp.projects;
+    App.openedProjectName = storedApp.openedProjectName;
+    
+    storedProjects.forEach(project => {
+        App.createProject(project.name);
+    });
 
-App.openedProjectName = App.projects[0].name;
+    storedProjects.forEach(project=>{
+        project.todos.forEach(todo=>{
+            App.getProject(project.name).createTodo(todo);
+        });
+    });
+}
+processLocalStorage();
 
-export { App };
+export { App, populateStorage };

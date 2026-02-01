@@ -17,13 +17,18 @@ function storageAvailable(type) {
 }
 
 function getStored() {
-    if (!storageAvailable('localStorage')) return 'No Storage';
+    if (!storageAvailable('localStorage')) return 'No storage Available';
 
+    const appStr = localStorage.getItem('app');
+    const appObj = JSON.parse(appStr);
+    return appObj;
 }
 
-function populateStorage() {
-    if (!storageAvailable('localStorage')) return 'No Storage';
+function populateStorage(appObj) {
+    if (!storageAvailable('localStorage')) return 'No Storage Available';
 
-}
+    const appStr = JSON.stringify(appObj,null," ");
+    localStorage.setItem('app', appStr);
+};
 
 export { getStored, populateStorage };
