@@ -18,8 +18,9 @@ function storageAvailable(type) {
 
 function getStored() {
     if (!storageAvailable('localStorage')) return 'No storage Available';
-
     const appStr = localStorage.getItem('app');
+    if(appStr === 'undefined') return;
+
     const appObj = JSON.parse(appStr);
     return appObj;
 }

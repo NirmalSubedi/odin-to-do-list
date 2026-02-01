@@ -33,7 +33,7 @@ const processProjectInput = () => {
 
 const refreshProjectList = () => {
     unregisterAction(cache.sidebar.querySelector('.project-list button.project-name'));
-    
+
     cache.sidebar.removeChild(cache.sidebar.querySelector('ul'));
     cache.sidebar.insertBefore(makeProjectsUl(), cache.sidebar.lastElementChild);
 
@@ -263,9 +263,11 @@ const getTodoTitle = (imgElement) => {
 const refreshTodoListRegistration = () => {
     unregisterAction(cache.projectTodosContainer.querySelector('ul .remove-todo-button img'));
     unregisterAction(cache.projectTodosContainer.querySelector('ul .edit-todo-button img'));
+    unregisterAction(cache.projectTodosContainer.querySelector('ul input[type=checkbox]'));
     refreshTodoList();
     registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
     registerAction(deleteTodo, ...cache.projectTodosContainer.querySelectorAll('ul .remove-todo-button img'));
+    registerAction(completeTodo, ...cache.projectTodosContainer.querySelectorAll('ul input[type=checkbox]'))
 };
 
 const deleteCompletedTodos = () => {
@@ -282,6 +284,14 @@ const deleteCompletedTodos = () => {
     toggleTodosControlButtons();
 };
 
+const completeTodo = (element) => {
+    const todoTitle = element.nextElementSibling.textContent;
+    const currentProjectName = getCurrentProjectName();
+    const todo = App.getProject(currentProjectName).getTodo(todoTitle);
+    todo.complete = true;
+    populateStorage(App);
+};
+
 // sidebar
 registerAction(toggleProjectsControlButtons, cache.editProjectsButton, cache.editProjectsButtonIcon, cache.editProjectsButtonSpan);
 registerAction(showProjectInput, cache.addProjectButton, cache.addProjectButtonIcon, cache.addProjectButtonSpan);
@@ -295,5 +305,6 @@ registerAction(saveTodoDetails, cache.todoDialogSaveButton);
 registerAction(editTodoDetails, ...cache.projectTodosContainer.querySelectorAll('ul .edit-todo-button img'));
 registerAction(clearTodoFields, cache.todoDialogCloseButton, cache.todoDialogCloseImg);
 registerAction(deleteTodo, ...cache.projectTodosContainer.querySelectorAll('ul .remove-todo-button img'));
+registerAction(completeTodo, ...cache.projectTodosContainer.querySelectorAll('ul input[type=checkbox]'))
 
 export { cache, getAction, processProjectInput, clearTodoFields };

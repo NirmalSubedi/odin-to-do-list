@@ -118,6 +118,7 @@ function makeTodosUl() {
         li.append(label, controls);
 
         if (todo.priority === false) priorityTag.classList.add('hide-tag');
+        if( todo.isComplete) checkbox.checked = true;
         return li;
     });
     lis.forEach(li => {
