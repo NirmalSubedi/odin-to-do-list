@@ -27,8 +27,8 @@ const App = {
 
 const processLocalStorage = () => {
     const storedApp = getStored();
-    if (storedApp === 'No storage Available' || storedApp === null) {
-        App.createProject('Home');
+    if (storedApp === 'No storage Available' || storedApp === null || storedApp === undefined) {
+        App.createProject('Inbox');
         App.openedProjectName = App.projects[0].name;
         return;
     };

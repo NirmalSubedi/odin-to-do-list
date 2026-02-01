@@ -27,7 +27,7 @@ function getStored() {
 function populateStorage(appObj) {
     if (!storageAvailable('localStorage')) return 'No Storage Available';
 
-    const appStr = JSON.stringify(appObj,null," ");
+    const appStr = JSON.stringify(appObj);
     localStorage.setItem('app', appStr);
 };
 

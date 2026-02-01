@@ -25,18 +25,22 @@ const processProjectInput = () => {
     populateStorage(App);
 
     const previousLiRemoveIcon = inputLi.previousElementSibling.firstElementChild.lastElementChild;
-    console.log(previousLiRemoveIcon);
     if (getRegistration(removeProject) !== undefined) unregisterAction(previousLiRemoveIcon);
     refreshProjectList();
     registerAction(removeProject, ...cache.sidebar.querySelectorAll('.project-name img'));
+    if(cache.editProjectsButtonSpan.textContent === 'Cancel') toggleProjectsEditButton();
 };
 
 const refreshProjectList = () => {
+    unregisterAction(cache.sidebar.querySelector('.project-list button.project-name'));
+    
     cache.sidebar.removeChild(cache.sidebar.querySelector('ul'));
     cache.sidebar.insertBefore(makeProjectsUl(), cache.sidebar.lastElementChild);
 
     cache.projectInputListItem = cache.sidebar.querySelector('li.new-project');
     cache.projectInputTextbox = cache.projectInputListItem.querySelector('input[type=text]');
+
+    registerAction(switchProjectPage, ...cache.sidebar.querySelectorAll('.project-list button.project-name'), ...cache.sidebar.querySelectorAll('.project-list .project-name span'));
 };
 
 const getCurrentProjectName = () => {
