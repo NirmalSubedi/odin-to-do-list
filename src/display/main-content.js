@@ -76,7 +76,7 @@ function makeTodosUl() {
             priorityTag = makeElement({ tag: 'p', text: 'Priority', classes: ['todo-priority-tag'] });
         };
         let dueDate;
-        if (todo.dueDate === undefined) {
+        if (todo.dueDate === undefined || todo.dueDate === '') {
             dueDate = makeElement({ tag: 'p', text: ``, classes: ['todo-due-date', 'hide-tag'] });
         } else {
             const displayDate = formatDistanceToNowStrict(parseISO(todo.dueDate), {addSuffix:true});
